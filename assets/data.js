@@ -15,10 +15,6 @@ window.MV = {
     ],
     telegram: ['@Arelman', 'https://t.me/Arelman'],
     email: 'korvinart23@gmail.com',
-    briefs: [
-      ['Бриф для коммерческих проектов', 'https://forms.gle/ZjkhtSPu34T9F6U56'],
-      ['Бриф для гражданских активистов', 'https://forms.gle/nEijUJLVFRHXmsxZ6']
-    ],
     photo: 'me.jpg'
   },
 

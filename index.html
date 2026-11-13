@@ -149,6 +149,49 @@ a{color:inherit}
 .brief a:last-child{background:#D9410B;color:#fff}
 .brief b{font:900 clamp(48px,7.4vw,128px)/.84 var(--display);text-transform:uppercase;display:block}
 .brief .go i{background:currentColor}.brief a:first-child .go i span{color:#F2C84B}.brief a:last-child .go i span{color:#D9410B}
+
+/* форма брифа на сайте: токены сайта (светлая/тёмная тема), цвет брифа — только акцент */
+.bf{--ac:#F2C84B;--line:color-mix(in srgb,var(--ink) 38%,transparent);--soft:color-mix(in srgb,var(--ink) 6%,transparent);min-height:calc(100svh - 58px);display:flex;flex-direction:column;background:var(--paper);color:var(--ink)}
+.bf.orange{--ac:#D9410B}
+.bf-bar{height:4px;background:var(--line)}
+.bf-bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .4s cubic-bezier(.2,.7,.2,1)}
+.bf-top{display:flex;justify-content:space-between;gap:16px;padding-block:14px;border-bottom:2px solid var(--rule)}
+.bf-top a{text-decoration:none;border-bottom:2px solid transparent}.bf-top a:hover{border-color:currentColor}
+.bf-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding-block:clamp(24px,4vw,64px) clamp(32px,5vw,80px);max-width:960px}
+.bf .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:0 0 clamp(14px,2vw,22px);color:var(--mute)}
+.bf .eyebrow::before{content:"";width:10px;height:10px;background:var(--ac);flex:none}
+.bf h1,.bf h2.big{margin:0 0 .35em;font:800 clamp(40px,5.6vw,84px)/.92 var(--display);text-transform:uppercase}
+.bf h2.q{margin:0 0 .4em;font:600 clamp(22px,2.5vw,34px)/1.18 var(--text);max-width:26em}
+.bf .lead{margin:0 0 clamp(20px,2.6vw,32px);font:400 clamp(17px,1.5vw,20px)/1.5 var(--text);max-width:38em}
+.bf .hint{margin:0 0 18px;font-size:15px;line-height:1.5;max-width:40em;color:var(--mute)}
+.bf .hint a,.bf .lead a{font-weight:600}
+.bf input[type=text],.bf textarea{display:block;width:100%;max-width:760px;font:400 clamp(17px,1.4vw,19px)/1.5 var(--text);color:var(--ink);background:transparent;border:2px solid var(--line);border-radius:0;padding:14px 16px;caret-color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.bf textarea{min-height:8em;resize:vertical}
+.bf input[type=text]:hover,.bf textarea:hover{border-color:var(--ink)}
+.bf input[type=text]:focus,.bf textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 5px 0 -1px var(--ac)}
+.bf ::placeholder{color:var(--mute);opacity:1}
+.bf .opts{display:grid;gap:8px;max-width:760px}
+.bf .opt{display:flex;align-items:center;gap:14px;border:2px solid var(--line);padding:13px 16px;cursor:pointer;font:400 clamp(16px,1.3vw,18px)/1.3 var(--text);transition:border-color .2s,background-color .2s}
+.bf .opt:hover{border-color:var(--ink)}
+.bf .opt input{appearance:none;flex:none;width:22px;height:22px;margin:0;border:2px solid var(--ink);background:transparent;display:grid;place-items:center;cursor:pointer}
+.bf .opt input::after{content:"";width:10px;height:10px;background:var(--ac);transform:scale(0);transition:transform .15s}
+.bf .opt input:checked::after{transform:scale(1)}
+.bf .opt:has(input:checked){border-color:var(--ink);background:var(--soft)}
+.bf .opt:has(input:focus-visible){outline:3px solid currentColor;outline-offset:3px}
+.bf .opt-other{margin-top:8px}
+.bf .err{margin:12px 0 0;font:500 13px/1.4 var(--mono);letter-spacing:.03em;min-height:1.4em}
+.bf .err:not(:empty)::before{content:"Ошибка · ";font-weight:700}
+.bf [aria-invalid=true]{border-color:var(--ink);box-shadow:0 5px 0 -1px var(--ink)}
+.bf .acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:clamp(14px,2vw,24px)}
+.bf .bfn{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:var(--paper);border:2px solid var(--ink);padding:13px 20px 13px 24px;font:800 clamp(20px,1.9vw,26px)/1 var(--display);text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background-color .2s,color .2s}
+.bf .bfn i{width:1.4em;height:1.4em;border-radius:50%;background:var(--ac);color:#0C0C0D;display:grid;place-items:center;font:600 .62em/1 var(--text);font-style:normal;transition:transform .25s}
+.bf .bfn:hover i{transform:translateX(5px)}
+.bf .bfn[disabled]{opacity:.55;cursor:progress}
+.bf .ghost{background:none;border:0;color:inherit;font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:10px 0;cursor:pointer;border-bottom:2px solid transparent}
+.bf .ghost:hover{border-color:currentColor}
+.bf .keys{font:500 12px/1.3 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
+.bf .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+@media (max-width:760px){.bf .keys{display:none}.bf .bfn{width:100%;justify-content:space-between}.bf-body{justify-content:flex-start}}
 .ft{background:var(--ink);color:var(--paper);padding-block:22px}
 .ft .in{display:flex;flex-wrap:wrap;gap:10px 40px;align-items:baseline}
 .ft b{font:800 24px/1 var(--display);text-transform:uppercase}
@@ -257,8 +300,11 @@ figcaption{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:u
 </div>
 <main id="app"></main>
 <script src="assets/data.js"></script>
+<script src="assets/briefs.js"></script>
 <script>
-const P = MV.projects, me = MV.person;
+const P = MV.projects, me = MV.person, BR = MV.briefs;
+const plural = (n, w) => n % 10 === 1 && n % 100 !== 11 ? w[0] : n % 10 > 1 && n % 10 < 5 && (n % 100 < 10 || n % 100 > 20) ? w[1] : w[2];
+const qCount = b => b.steps.reduce((n, s) => n + s.fields.length, 0);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const im = (f, alt) => { const d = MV.dims[f] || [16, 9]; return `<img src="assets/${f}" alt="${esc(alt || '')}" width="${d[0]}" height="${d[1]}" loading="lazy">`; };
 const pal = p => `--pb:${p.pal.bg};--pf:${p.pal.fg};--pa:${p.pal.ac};--hb:${p.pal.bg};--hf:${p.pal.fg}`;
@@ -333,8 +379,7 @@ function home() {
   <div class="sect-h stack wrap"><h2>Расскажите о задаче</h2><span class="mono">С чего начинается работа</span></div>
   <p class="brief-lead wrap">Бриф поможет вам сформулировать задачу, а мне — понять её. Я прочитаю ответы и напишу вам, как двигаться дальше.</p>
   <div class="brief">
-    <a class="wrap" href="${me.briefs[0][1]}" target="_blank" rel="noopener"><span class="mono">Бриф 01 · Google Forms</span><span><b>Коммерческий проект</b><span class="go" style="margin-top:18px">Открыть бриф <i><span>→</span></i></span></span></a>
-    <a class="wrap" href="${me.briefs[1][1]}" target="_blank" rel="noopener"><span class="mono">Бриф 02 · Google Forms</span><span><b>Гражданская инициатива</b><span class="go" style="margin-top:18px">Открыть бриф <i><span>→</span></i></span></span></a>
+    ${BR.map(b => `<a class="wrap" href="#brief-${b.id}"><span class="mono">Бриф ${b.n} · ${qCount(b)} ${plural(qCount(b), ['вопрос', 'вопроса', 'вопросов'])}</span><span><b>${esc(b.name)}</b><span class="go" style="margin-top:18px">Открыть бриф <i><span>→</span></i></span></span></a>`).join('')}
   </div>
 </section>`;
 }
@@ -411,21 +456,109 @@ function typoTree(root) {
   const list = []; while (w.nextNode()) list.push(w.currentNode);
   list.forEach(n => { const t = typo(n.nodeValue); if (t !== n.nodeValue) n.nodeValue = t; });
 }
+/* Бриф на сайте: один вопрос на экран, ответы уходят в приёмную форму Google, черновик живёт в браузере */
+let BF = null;
+const bfKey = id => 'mv-brief-' + id;
+function bfStore(b, v) {
+  try { if (v === undefined) return JSON.parse(localStorage.getItem(bfKey(b.id)) || '{}'); if (v === null) localStorage.removeItem(bfKey(b.id)); else localStorage.setItem(bfKey(b.id), JSON.stringify(v)); } catch (e) {}
+  return {};
+}
+function briefShell(b) {
+  return `<section class="bf ${b.color}" id="bf" aria-label="${esc(b.title)}"><div class="bf-bar"><i id="bf-p"></i></div>
+  <div class="bf-top wrap mono"><a href="#brief">← К сайту</a><span id="bf-n"></span></div>
+  <div class="bf-body wrap" id="bf-body"></div></section>`;
+}
+function bfStart(b) {
+  const screens = [{ k: 'intro' }];
+  b.steps.forEach(s => { if (s.intro) screens.push({ k: 'sec', s }); s.fields.forEach(f => screens.push({ k: 'q', f, s })); });
+  const st = bfStore(b);
+  BF = { b, screens, i: 0, a: st.a || {}, saved: Math.min(st.i || 0, screens.length - 1), err: '', busy: false, sent: false };
+  bfRender(true);
+}
+const bfVal = f => { const v = BF.a[f.e]; if (f.t === 'check' || f.t === 'radio') { const l = (v || []).slice(); if (l.includes('__other')) { l.splice(l.indexOf('__other'), 1, f.other + ': ' + (BF.a[f.e + '_o'] || '').trim()); } return l.join(', '); } return (v || '').trim(); };
+const bfFilled = f => f.t === 'check' || f.t === 'radio' ? !!(BF.a[f.e] || []).length && !((BF.a[f.e] || []).includes('__other') && !(BF.a[f.e + '_o'] || '').trim()) : !!bfVal(f);
+function bfRender(noFocus) {
+  const { b, screens, i, a } = BF, sc = screens[i], body = document.getElementById('bf-body'); if (!body) return;
+  const qt = qCount(b), qn = screens.slice(0, i + 1).filter(x => x.k === 'q').length;
+  document.getElementById('bf-p').style.width = (BF.sent ? 100 : Math.round(i / (screens.length - 1) * 100)) + '%';
+  document.getElementById('bf-n').textContent = BF.sent ? 'Отправлено' : sc.k === 'q' ? `${String(qn).padStart(2, '0')} / ${qt}` : `Бриф ${b.n}`;
+  const err = `<p class="err" role="alert">${esc(BF.err)}</p>`;
+  const back = i > 0 && !BF.sent ? '<button type="button" class="ghost" id="bf-back">← Назад</button>' : '';
+  let h = '';
+  if (BF.sent) {
+    h = `<p class="eyebrow mono"><span>Бриф ${b.n} · ${esc(b.name)}</span></p><h1>Спасибо</h1><p class="lead">Ответы получены. Я прочитаю их и напишу вам, как двигаться дальше.</p><p class="hint">Если хотите добавить файлы с примерами, пришлите их в Telegram <a href="${me.telegram[1]}" target="_blank" rel="noopener">${me.telegram[0]}</a> или на почту ${me.email}.</p><div class="acts"><a class="bfn" href="#works" data-sec>К работам <i>→</i></a></div>`;
+  } else if (sc.k === 'intro') {
+    h = `<p class="eyebrow mono"><span>Бриф ${b.n}</span><span>${qCount(b)} ${plural(qCount(b), ['вопрос', 'вопроса', 'вопросов'])}</span></p><h1>${esc(b.title)}</h1><p class="lead">${esc(b.intro)}</p><div class="acts"><button type="button" class="bfn" id="bf-go">${BF.saved ? 'Продолжить' : 'Начать'} <i>→</i></button>${BF.saved ? '<button type="button" class="ghost" id="bf-reset">Начать заново</button>' : ''}</div>`;
+  } else if (sc.k === 'sec') {
+    h = `<p class="eyebrow mono"><span>Раздел</span></p><h2 class="big">${esc(sc.s.title)}</h2><p class="lead">${esc(sc.s.intro)}${sc.s.link ? ` <a href="${esc(sc.s.link[1])}" target="_blank" rel="noopener">${esc(sc.s.link[0])}</a>.` : ''}</p><div class="acts"><button type="button" class="bfn" id="bf-go">Дальше <i>→</i></button>${back}</div>`;
+  } else {
+    const f = sc.f, last = i === screens.length - 1, id = 'f' + f.e.slice(6);
+    let inp;
+    if (f.t === 'short') inp = `<input type="text" id="${id}" value="${esc(a[f.e] || '')}" autocomplete="off" aria-describedby="${id}h">`;
+    else if (f.t === 'long') inp = `<textarea id="${id}" placeholder="${esc(f.ph || '')}" aria-describedby="${id}h">${esc(a[f.e] || '')}</textarea>`;
+    else {
+      const sel = a[f.e] || [], one = f.t === 'radio';
+      inp = `<div class="opts" role="group" aria-labelledby="${id}l">${f.o.map(o => `<label class="opt"><input type="checkbox" value="${esc(o)}" ${sel.includes(o) ? 'checked' : ''}>${esc(o)}</label>`).join('')}${f.other ? `<label class="opt"><input type="checkbox" value="__other" ${sel.includes('__other') ? 'checked' : ''}>${esc(f.other)}</label>${sel.includes('__other') ? `<input type="text" class="opt-other" id="${id}o" placeholder="Напишите свой вариант" value="${esc(a[f.e + '_o'] || '')}">` : ''}` : ''}</div>`;
+    }
+    h = `<p class="eyebrow mono"><span>${esc(sc.s.title)}</span><span class="req">${f.r ? 'Обязательный вопрос' : 'Можно пропустить'}</span></p><h2 class="q" id="${id}l"><label for="${id}">${esc(f.q)}</label></h2>${f.h ? `<p class="hint" id="${id}h">${esc(f.h)}</p>` : ''}${inp}${err}<input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true"><div class="acts"><button type="button" class="bfn" id="bf-go" ${BF.busy ? 'disabled' : ''}>${last ? (BF.busy ? 'Отправляем…' : 'Отправить') : 'Дальше'} <i>→</i></button>${back}<span class="keys">${f.t === 'short' ? 'Enter — дальше' : f.t === 'long' ? 'Ctrl + Enter — дальше' : ''}</span></div>`;
+  }
+  body.innerHTML = h; typoTree(body);
+  if (BF.err && sc.k === 'q') body.querySelector('input[type=text],textarea,.opts')?.setAttribute('aria-invalid', 'true');
+  const go = document.getElementById('bf-go'); if (go) go.onclick = bfNext;
+  const bk = document.getElementById('bf-back'); if (bk) bk.onclick = () => { BF.err = ''; BF.i--; bfRender(); bfTop(); };
+  const rs = document.getElementById('bf-reset'); if (rs) rs.onclick = () => { BF.a = {}; BF.saved = 0; bfStore(b, null); bfRender(); };
+  if (sc.k === 'q' && !BF.sent) {
+    const f = sc.f;
+    body.querySelectorAll('input[type=text],textarea').forEach(el => {
+      el.oninput = () => { BF.a[el.classList.contains('opt-other') ? f.e + '_o' : f.e] = el.value; bfStore(b, { a: BF.a, i: BF.i }); };
+      el.onkeydown = e => { if (e.key === 'Enter' && (el.tagName === 'INPUT' || e.ctrlKey || e.metaKey)) { e.preventDefault(); bfNext(); } };
+    });
+    body.querySelectorAll('.opt input').forEach(el => {
+      el.onchange = () => {
+        let l = (BF.a[f.e] || []).filter(x => x !== el.value);
+        if (el.checked) l = f.t === 'radio' ? [el.value] : l.concat(el.value);
+        BF.a[f.e] = l; bfStore(b, { a: BF.a, i: BF.i }); bfRender(); body.querySelectorAll('.opt input').forEach(x => { if (x.value === el.value) x.focus({ preventScroll: true }); });
+      };
+    });
+  }
+  if (!noFocus) { const t = body.querySelector('input[type=text],textarea') || document.getElementById('bf-go'); if (t) t.focus({ preventScroll: true }); }
+}
+const bfTop = () => document.getElementById('bf')?.scrollIntoView();
+function bfNext() {
+  const { screens } = BF, sc = screens[BF.i];
+  if (BF.i === 0 && BF.saved) { BF.i = BF.saved; BF.err = ''; bfRender(); bfTop(); return; }
+  if (sc.k === 'q' && sc.f.r && !bfFilled(sc.f)) { BF.err = 'Ответьте, пожалуйста: этот вопрос обязательный.'; bfRender(); return; }
+  BF.err = '';
+  if (BF.i < screens.length - 1) { BF.i++; bfStore(BF.b, { a: BF.a, i: BF.i }); bfRender(); bfTop(); return; }
+  bfSend();
+}
+function bfSend() {
+  const { b } = BF, body = new URLSearchParams();
+  b.steps.forEach(s => s.fields.forEach(f => { const v = bfVal(f); if (v) body.append(f.e, v); }));
+  BF.busy = true; bfRender(true);
+  const done = () => { BF.sent = true; BF.busy = false; bfStore(b, null); bfRender(); bfTop(); };
+  if (document.querySelector('.hp')?.value) return done();
+  fetch(b.form, { method: 'POST', mode: 'no-cors', body }).then(done).catch(() => {
+    BF.busy = false; BF.err = `Не получилось отправить. Проверьте интернет и попробуйте ещё раз или напишите мне: ${me.telegram[0]}, ${me.email}.`; bfRender(true);
+  });
+}
+
 const SECS = ['works', 'about', 'reviews', 'brief'];
 let pending = null;
 function route() {
   const h = location.hash.slice(1), p = P.find(x => x.id === h), app = document.getElementById('app');
-  const isSec = SECS.includes(h);
-  if (p) { app.innerHTML = kase(p) + footer(); scrollTo(0, 0); }
+  const isSec = SECS.includes(h), bb = BR.find(x => 'brief-' + x.id === h);
+  if (bb) { app.innerHTML = briefShell(bb) + footer(); bfStart(bb); scrollTo(0, 0); }
+  else if (p) { app.innerHTML = kase(p) + footer(); scrollTo(0, 0); }
   else {
     if (!app.dataset.home) app.innerHTML = home() + footer();
     fit(); bindShapes();
     const t = isSec ? h : pending; pending = null;
     if (t) requestAnimationFrame(() => document.getElementById(t)?.scrollIntoView()); else if (!isSec) scrollTo(0, 0);
   }
-  app.dataset.home = p ? '' : '1'; theme(p);
+  app.dataset.home = p || bb ? '' : '1'; theme(p);
   typoTree(document.body); fit();
-  document.title = (p ? p.name + ' — ' : '') + 'Воронов';
+  document.title = (p ? p.name + ' — ' : bb ? 'Бриф — ' : '') + 'Воронов';
 }
 function bindShapes() {
   const cap = document.getElementById('cap'); if (!cap) return; const def = cap.innerHTML;
