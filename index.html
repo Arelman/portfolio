@@ -198,7 +198,7 @@ a{color:inherit}
 .ft .in{display:flex;flex-wrap:wrap;gap:10px 40px;align-items:baseline}
 .ft b{font:800 24px/1 var(--display);text-transform:uppercase}
 .ft a{font:500 14px/1.4 var(--mono)}
-.ft .r{margin-left:auto;opacity:.6;font-size:13px}
+.ft .r{opacity:.6;font-size:13px}
 
 /* кейс */
 .chd{background:var(--hb);color:var(--hf);padding-block:16px clamp(22px,3vw,44px)}
@@ -282,7 +282,7 @@ figcaption{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:u
   .figs,.figs.n2{grid-template-columns:1fr}.grow{flex-direction:column}.grow>div{flex:none!important}
   .mt{grid-template-columns:1fr 1fr;row-gap:22px}
   .ba .pair{grid-template-columns:1fr}.ba .ar{transform:rotate(90deg);justify-self:center;line-height:.6}
-  .ft .r{margin-left:0}
+  .ft .in{flex-direction:column;align-items:flex-start;gap:14px}
 }
 @media (max-width:480px){.mt{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
@@ -431,7 +431,7 @@ function kase(p) {
 }
 
 function footer() {
-  return `<footer class="ft"><div class="in wrap"><b>${me.name}</b><a href="${me.telegram[1]}" target="_blank" rel="noopener">Telegram ${me.telegram[0]}</a><span class="mono" style="text-transform:none;user-select:all">${me.email}</span><span class="r">Если вам подходит такой взгляд на дизайн, давайте обсудим ваш проект.</span></div></footer>`;
+  return `<footer class="ft"><div class="in wrap"><b>${me.name}</b><span class="r">Если вам подходит такой взгляд на дизайн, давайте обсудим ваш проект.</span><a href="${me.telegram[1]}" target="_blank" rel="noopener">Telegram ${me.telegram[0]}</a><a href="mailto:${me.email}">${me.email}</a></div></footer>`;
 }
 
 function fit() {
