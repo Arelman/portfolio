@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Регламент — концепция 2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@200;300;400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Регламент: сайт устроен как руководство по фирменному стилю — тот самый документ, который дизайнер сдаёт клиентам.
+   Постоянное оглавление слева, нумерованные разделы, таблицы свойств, рисунки с подписями, сетка по кнопке. */
+:root{
+  --bg:#F3F5F8; --paper:#FFFFFF; --ink:#0D1320; --mute:#566175; --line:#D2D8E1; --blue:#1C3FD6; --tint:#E7ECFB;
+  --head:'Geologica','Segoe UI',system-ui,sans-serif;
+  --text:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono','SFMono-Regular',Consolas,monospace;
+  --side:272px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:64px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--text)}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.mono{font:400 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
+.pbar{background:#1b1b1f;color:#b9b9c2;font:500 12px/1.2 system-ui,sans-serif;display:flex;gap:6px 14px;align-items:center;flex-wrap:wrap;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))}
+.pbar a{color:#fff;text-decoration:none;padding:5px 10px;border-radius:99px;white-space:nowrap}
+.pbar a:hover{background:#34343b}.pbar a[aria-current]{background:#fff;color:#111}.pbar .sp{margin-left:auto}
+
+.app{display:grid;grid-template-columns:var(--side) minmax(0,1fr)}
+.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--paper);border-right:1px solid var(--line);padding:22px 20px;display:flex;flex-direction:column;gap:22px}
+.side .ttl{font:400 20px/1.1 var(--head);text-decoration:none;display:block}
+.side .ttl small{display:block;margin-top:6px}
+.toc{list-style:none;margin:0;padding:0;font-size:14.5px}
+.toc a{display:grid;grid-template-columns:34px 1fr;gap:4px;padding:6px 8px;margin-inline:-8px;text-decoration:none;border-radius:3px}
+.toc a:hover{background:var(--bg)}
+.toc a i{font:400 11.5px/1.9 var(--mono);font-style:normal;color:var(--mute)}
+.toc a[aria-current]{background:var(--tint);color:var(--blue)}.toc a[aria-current] i{color:var(--blue)}
+.toc ul{list-style:none;margin:2px 0 6px;padding:0}
+.toc ul a{font-size:13.5px;padding-block:4px}
+.side .ct{margin-top:auto;font-size:13.5px;border-top:1px solid var(--line);padding-top:14px;display:grid;gap:4px}
+.side .ct a{color:var(--blue)}
+
+.bar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:10px clamp(16px,4vw,56px);min-height:48px}
+.crumbs{font:400 12px/1.3 var(--mono);color:var(--mute);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.crumbs a{text-decoration:none}.crumbs a:hover{color:var(--blue)}.crumbs b{font-weight:500;color:var(--ink)}
+.bar .r{margin-left:auto;display:flex;gap:8px}
+.btn{font:400 12px/1 var(--mono);letter-spacing:.03em;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:8px 10px;border-radius:3px;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--ink)}.btn[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}
+.mbtn{display:none}
+.gridov{position:fixed;top:0;bottom:0;left:var(--side);right:0;z-index:5;pointer-events:none;display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(10px,1.6vw,24px);padding-inline:clamp(16px,4vw,56px)}
+.gridov i{background:rgba(28,63,214,.07);border-inline:1px solid rgba(28,63,214,.18)}
+
+.pg{padding:clamp(22px,3.4vw,48px) clamp(16px,4vw,56px) 72px;max-width:1280px}
+.sec{padding-block:clamp(26px,3.6vw,52px);border-top:1px solid var(--ink)}
+.sec:first-child{border-top:0;padding-top:0}
+.sh{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 clamp(10px,1.6vw,24px);align-items:baseline;margin-bottom:clamp(18px,2.4vw,32px)}
+.sh .n{grid-column:1/3;font:400 13px/1 var(--mono);color:var(--blue)}
+.sh h2{grid-column:3/9;margin:0;font:300 clamp(30px,3.4vw,46px)/1.05 var(--head);letter-spacing:-.01em}
+.sh p{grid-column:9/13;margin:0;font-size:14px;color:var(--mute)}
+
+/* титульный лист */
+.cover{position:relative;padding-block:clamp(18px,3vw,40px) clamp(22px,3vw,40px)}
+.cover .lab{display:flex;gap:8px 28px;flex-wrap:wrap;margin-bottom:clamp(26px,4vw,60px)}
+.specbox{position:relative;font:200 clamp(52px,8.6vw,128px)/1 var(--head);letter-spacing:-.035em}
+.spec{font:inherit;letter-spacing:inherit;margin:0;white-space:nowrap}
+.ln{position:absolute;left:0;right:0;border-top:1px solid var(--blue);opacity:.6;pointer-events:none}
+.ln span{position:absolute;right:0;bottom:3px;font:400 10.5px/1 var(--mono);letter-spacing:.02em;color:var(--blue);white-space:nowrap}
+.ln.a{top:var(--cap,.2em)}.ln.b{top:var(--xh,.39em);border-top-style:dashed}.ln.c{top:var(--base,.87em)}
+.cover-wrap{overflow:hidden}
+.cover .st{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 clamp(10px,1.6vw,24px);margin-top:clamp(28px,4vw,60px)}
+.cover .st p{grid-column:1/8;margin:0;font:300 clamp(22px,2.5vw,36px)/1.22 var(--head);letter-spacing:-.01em;text-wrap:pretty}
+.cover .st div{grid-column:9/13;font-size:14.5px;color:var(--mute);align-self:end}
+.pass{display:grid;grid-template-columns:8fr 4fr;gap:clamp(18px,3vw,48px);align-items:start}
+.dl{margin:0;border-top:1px solid var(--line)}
+.dl div{display:grid;grid-template-columns:minmax(110px,2fr) 6fr;gap:16px;border-bottom:1px solid var(--line);padding:11px 0}
+.dl dt{font:400 11.5px/1.7 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
+.dl dd{margin:0;min-width:0}
+.dl dd a{color:var(--blue)}
+figure{margin:0}
+figcaption{font:400 11.5px/1.45 var(--mono);color:var(--mute);margin-top:8px;display:grid;grid-template-columns:auto 1fr;gap:10px}
+figcaption b{font-weight:500;color:var(--blue);white-space:nowrap}
+.frame{background:var(--paper);border:1px solid var(--line);padding:clamp(6px,1vw,12px)}
+.frame img{width:100%}
+.ph img{aspect-ratio:4/5;object-fit:cover;object-position:57% 40%;filter:grayscale(1)}
+
+/* реестр работ */
+.flt{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:14px}
+.flt .cnt{margin-left:auto}
+.reg{border-bottom:1px solid var(--line)}
+.rw{display:grid;grid-template-columns:36px 132px minmax(0,1.25fr) minmax(0,1.7fr) minmax(0,1.3fr) 118px 44px;gap:clamp(10px,1.6vw,24px);align-items:center;border-top:1px solid var(--line);padding:12px 0;text-decoration:none;position:relative}
+.rw.hd{padding:8px 0;border-top:1px solid var(--ink)}
+a.rw:hover{background:var(--paper);box-shadow:-16px 0 0 var(--paper),16px 0 0 var(--paper)}
+a.rw:hover .nm b{color:var(--blue)}
+.rw .th{aspect-ratio:16/10;overflow:hidden;background:var(--line)}.rw .th img{width:100%;height:100%;object-fit:cover}
+.rw .nm b{display:block;font:400 21px/1.1 var(--head);letter-spacing:-.01em}
+.rw .nm small{display:block;font-size:13px;color:var(--mute);margin-top:4px}
+.rw .ds{font-size:14.5px;line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chips span{font:400 11px/1 var(--mono);border:1px solid var(--line);background:var(--paper);padding:5px 6px;border-radius:2px;white-space:nowrap}
+.sw{display:flex;margin-top:8px}.sw i{width:16px;height:8px;border:1px solid rgba(13,19,32,.15)}.sw i+i{border-left:0}
+.rw .yr{font:400 13px/1 var(--mono);text-align:right}
+
+/* принципы и матрица */
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.6vw,24px);margin-bottom:clamp(22px,3vw,40px)}
+.rule{border-top:1px solid var(--ink);padding-top:10px}
+.rule p{margin:10px 0 0;font:300 clamp(19px,1.7vw,24px)/1.28 var(--head)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.6vw,24px);margin-bottom:clamp(22px,3vw,40px)}
+.two div{background:var(--paper);border:1px solid var(--line);padding:16px 18px 18px}
+.two b{display:block;font:300 clamp(24px,2.4vw,34px)/1.05 var(--head);margin:22px 0 8px}
+.two div:last-child{background:var(--ink);color:#fff;border-color:var(--ink)}.two div:last-child .mono{color:#aab4c8}
+.two div:last-child b{font-weight:500}
+.scroll{overflow-x:auto;border:1px solid var(--line);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+tr:last-child td{border-bottom:0}
+thead th{font:400 11px/1.3 var(--mono);letter-spacing:.03em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid var(--ink);white-space:nowrap}
+.mx td:not(:first-child),.mx th:not(:first-child){text-align:center;min-width:92px}
+.mx td:first-child{white-space:nowrap}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--blue)}
+.no{color:var(--line)}
+.rv td:first-child{font:400 12px/1.5 var(--mono);color:var(--mute);width:24%;min-width:150px}
+.rv td:nth-child(2){min-width:280px}
+.rv td:nth-child(n+3){font:500 13px/1.6 var(--mono);color:var(--blue);white-space:nowrap;width:1%}
+.sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.6vw,24px);margin-bottom:18px}
+.sum div{border-top:1px solid var(--ink);padding-top:8px}
+.sum b{display:block;font:200 clamp(38px,4.4vw,60px)/1 var(--head);letter-spacing:-.03em;margin-top:6px}
+
+.forms{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.6vw,24px);margin-bottom:clamp(18px,2.4vw,32px)}
+.form{display:flex;flex-direction:column;gap:26px;background:var(--paper);border:1px solid var(--line);padding:18px 20px 20px;text-decoration:none;transition:border-color .2s}
+.form:hover{border-color:var(--blue)}
+.form b{display:block;font:300 clamp(24px,2.5vw,36px)/1.08 var(--head);letter-spacing:-.01em}
+.form span.go{font:500 13px/1 var(--mono);color:var(--blue)}
+.note{font-size:14px;color:var(--mute);max-width:52em}
+
+/* лист проекта */
+.ph1{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 clamp(10px,1.6vw,24px);margin-bottom:clamp(18px,2.6vw,36px)}
+.ph1 .n{grid-column:1/-1;font:400 13px/1 var(--mono);color:var(--blue);margin-bottom:14px}
+.ph1 h1{grid-column:1/-1;margin:0;font:200 clamp(42px,6.4vw,92px)/1 var(--head);letter-spacing:-.035em;text-wrap:balance}
+.ph1 p{grid-column:1/9;margin:16px 0 0;font:300 clamp(19px,1.9vw,26px)/1.25 var(--head)}
+.props{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);margin-bottom:clamp(18px,2.6vw,36px)}
+.props div{padding:10px 14px 14px 0;border-bottom:1px solid var(--line);min-width:0}
+.props dt{font:400 11px/1.4 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.props dd{margin:0;font-size:14.5px;line-height:1.4}
+.ok{display:inline-flex;align-items:center;gap:6px}.ok::before{content:"";width:8px;height:8px;border-radius:50%;background:#17915a}
+.pal{display:flex}.pal i{width:34px;height:20px;border:1px solid rgba(13,19,32,.18)}.pal i+i{border-left:0}
+.lay{display:grid;grid-template-columns:minmax(0,1fr) 216px;gap:clamp(18px,3vw,48px);align-items:start;margin-top:clamp(22px,3vw,44px)}
+.onp{position:sticky;top:70px;font-size:13.5px}
+.onp ol{list-style:none;margin:10px 0 0;padding:0;border-left:1px solid var(--line)}
+.onp a{display:block;padding:5px 0 5px 12px;margin-left:-1px;border-left:1px solid transparent;text-decoration:none;color:var(--mute);line-height:1.3}
+.onp a:hover{color:var(--blue);border-color:var(--blue)}
+.doc>*{margin:0 0 18px;max-width:46em}
+.doc>.w{max-width:none}
+.doc h2{display:grid;grid-template-columns:76px 1fr;align-items:baseline;border-top:1px solid var(--ink);padding-top:12px;margin-top:clamp(30px,4vw,56px);font:300 clamp(26px,2.7vw,36px)/1.1 var(--head);letter-spacing:-.01em;max-width:none}
+.doc h2 i{font:400 12.5px/1 var(--mono);font-style:normal;color:var(--blue);letter-spacing:0}
+.doc h3{font:500 12px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--mute);margin-top:26px;margin-bottom:10px}
+.intro{font:300 clamp(20px,2vw,27px)/1.3 var(--head);max-width:36em!important;text-wrap:pretty}
+.thesis{border:1px solid var(--blue);background:var(--tint);padding:14px 18px 18px;max-width:none!important}
+.thesis .mono{color:var(--blue)}
+.thesis p{margin:8px 0 0;font:300 clamp(20px,2.1vw,29px)/1.25 var(--head);max-width:34em}
+.spec-l{border-top:1px solid var(--line);max-width:none!important}
+.spec-l div{display:grid;grid-template-columns:30px minmax(0,3fr) minmax(0,7fr);gap:14px;border-bottom:1px solid var(--line);padding:10px 0}
+.spec-l div.nob{grid-template-columns:30px 1fr}
+.spec-l i{font:400 11.5px/1.8 var(--mono);font-style:normal;color:var(--mute)}
+.spec-l b{font-weight:600}
+.fgrid{display:grid;gap:clamp(8px,1.2vw,16px)}
+.fgrid.n2,.fgrid.n4{grid-template-columns:1fr 1fr}.fgrid.n3{grid-template-columns:repeat(3,1fr)}
+.fcards{display:grid;gap:clamp(10px,1.6vw,24px);grid-template-columns:repeat(3,minmax(0,1fr))}
+.fcards.n2{grid-template-columns:1fr 1fr}
+.fcards h4{margin:10px 0 4px;font:500 15.5px/1.3 var(--text)}
+.fcards p{margin:0;font-size:14px;color:var(--mute);line-height:1.45}
+.fcards img{aspect-ratio:1;object-fit:cover}
+.mtb td:nth-child(2){font:300 clamp(26px,2.6vw,36px)/1 var(--head);color:var(--blue);white-space:nowrap;letter-spacing:-.02em}
+.mtb td:first-child{font-weight:600;min-width:170px}.mtb td:last-child{color:var(--mute);min-width:260px}
+.bat{display:grid;gap:18px}
+.bat .p{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.2vw,16px)}
+.bat .p div{position:relative}
+.bat .p span{position:absolute;left:8px;top:8px;font:500 10.5px/1 var(--mono);background:var(--ink);color:#fff;padding:5px 6px;z-index:1}
+.bat .p div:last-child span{background:var(--blue)}
+.bat p{margin:8px 0 0;font-size:14px;color:var(--mute)}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.6vw,24px);margin-top:clamp(36px,5vw,72px);border-top:1px solid var(--ink);padding-top:16px}
+.pager a{text-decoration:none;background:var(--paper);border:1px solid var(--line);padding:14px 16px 16px}
+.pager a:hover{border-color:var(--blue)}
+.pager a:last-child{text-align:right}
+.pager b{display:block;font:300 clamp(20px,2.2vw,30px)/1.1 var(--head);margin-top:8px}
+.foot{margin-top:56px;border-top:1px solid var(--line);padding-top:14px;display:flex;flex-wrap:wrap;gap:6px 28px}
+
+@media (max-width:980px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{position:fixed;inset:0 auto 0 0;z-index:40;width:min(86vw,320px);height:auto;transform:translateX(-102%);transition:transform .25s;padding-top:calc(22px + env(safe-area-inset-top,0px));box-shadow:0 0 0 100vmax rgba(13,19,32,0)}
+  .side.open{transform:none;box-shadow:0 0 0 100vmax rgba(13,19,32,.45)}
+  .mbtn{display:block}.gridov{left:0}
+  .lay{grid-template-columns:minmax(0,1fr)}.onp{display:none}
+  .rw{grid-template-columns:36px 108px minmax(0,1fr) 44px;row-gap:8px;align-items:start}
+  .rw.hd{display:none}
+  .rw>:first-child{grid-column:1;grid-row:1}.rw .th{grid-column:2;grid-row:1/3}.rw .nm{grid-column:3;grid-row:1}.rw .yr{grid-column:4;grid-row:1}
+  .rw .ds{grid-column:3/5;grid-row:2}.rw .ch{grid-column:3/5;grid-row:3}.rw .fm{grid-column:3/5;grid-row:4}
+  .reg{border-top:1px solid var(--ink)}
+}
+@media (max-width:720px){
+  body{font-size:15.5px}
+  .sh .n,.sh h2,.sh p{grid-column:1/-1}.sh .n{margin-bottom:10px}.sh p{margin-top:10px}
+  .cover .st p,.cover .st div{grid-column:1/-1}.cover .st div{margin-top:14px}
+  .spec{white-space:normal}.ln{display:none}
+  .pass,.rules,.two,.forms,.pager{grid-template-columns:1fr}
+  .pass figure{max-width:260px}
+  .sum{grid-template-columns:1fr 1fr;row-gap:16px}
+  .props{grid-template-columns:1fr 1fr}
+  .ph1 p{grid-column:1/-1}
+  .rw{grid-template-columns:112px minmax(0,1fr);column-gap:14px}
+  .rw>:first-child{display:none}.rw .th{grid-column:1;grid-row:1}.rw .nm{grid-column:2;grid-row:1}
+  .rw .ds{grid-column:1/-1;grid-row:2}.rw .ch{grid-column:1/-1;grid-row:3}.rw .fm{grid-column:1;grid-row:4}.rw .yr{grid-column:2;grid-row:4}
+  .fcards,.fcards.n2,.fgrid.n3{grid-template-columns:1fr}
+  .spec-l div{grid-template-columns:30px 1fr}.spec-l div b{grid-column:2}.spec-l div span{grid-column:2}
+  .doc h2{grid-template-columns:54px 1fr}
+  .dl div{grid-template-columns:1fr;gap:2px}
+  .pager a:last-child{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="pbar" id="pbar"></div>
+<div class="app">
+  <aside class="side" id="side">
+    <a class="ttl" href="#intro">Матвей Воронов<small class="mono">Руководство · ред. 11.2026</small></a>
+    <nav aria-label="Оглавление"><ul class="toc" id="toc"></ul></nav>
+    <div class="ct"><span class="mono">Связь</span><a href="https://t.me/Arelman" target="_blank" rel="noopener">Telegram @Arelman</a><span style="user-select:all">korvinart23@gmail.com</span></div>
+  </aside>
+  <div>
+    <div class="bar">
+      <button class="btn mbtn" id="mbtn" aria-controls="side" aria-expanded="false">☰ Оглавление</button>
+      <div class="crumbs" id="crumbs"></div>
+      <div class="r"><button class="btn" id="gbtn" aria-pressed="false" title="Показать модульную сетку страницы">Сетка 12</button></div>
+    </div>
+    <main class="pg" id="app"></main>
+  </div>
+</div>
+<div class="gridov" id="gridov" hidden><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<script src="assets/data.js"></script>
+<script>
+const P = MV.projects, me = MV.person;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const im = (f, alt) => { const d = MV.dims[f] || [16, 9]; return `<img src="assets/${f}" alt="${esc(alt || '')}" width="${d[0]}" height="${d[1]}" loading="lazy">`; };
+const SECS = [['intro', '0', 'Введение'], ['works', '1', 'Работы'], ['method', '2', 'Принципы и состав работ'], ['reviews', '3', 'Отзывы'], ['brief', '4', 'Бриф и контакты']];
+const sw = p => `<span class="sw">${[p.pal.bg, p.pal.ac, p.pal.fg].map(c => `<i style="background:${c}"></i>`).join('')}</span>`;
+const sh = (n, t, note) => `<div class="sh"><span class="n">${n}</span><h2>${t}</h2><p>${note || ''}</p></div>`;
+const MATRIX = [
+  ['Логотип', 'ri salt fas tme sk kp'], ['Брендбук', 'ri salt fas sk'], ['Нейминг', 'sk'], ['Tone of Voice', 'ri salt'],
+  ['Набор иконок', 'ri salt'], ['SMM-конструктор в Figma', 'ri salt'], ['Деловая документация', 'ri'], ['Мерч', 'ri salt'],
+  ['Концепты упаковки', 'tme'], ['Презентация для инвесторов', 'kp']
+];
+const SCOPES = ['Айдентика', 'Логотип', 'SMM-набор и мерч', 'Бренд- и коммуникационная стратегия', 'Презентация', 'Нейминг'];
+let filter = '';
+
+function registry() {
+  const rows = P.map((p, i) => ({ p, i })).filter(x => !filter || x.p.scope.includes(filter));
+  return `<div class="flt" role="group" aria-label="Фильтр по объёму работ">
+    <button class="btn" data-f="" aria-pressed="${!filter}">Все</button>
+    ${SCOPES.map(s => `<button class="btn" data-f="${esc(s)}" aria-pressed="${filter === s}">${esc(s)}</button>`).join('')}
+    <span class="mono cnt">Показано ${rows.length} из ${P.length}</span></div>
+  <div class="reg">
+    <div class="rw hd mono"><span>№</span><span>Рис.</span><span>Проект</span><span>Задача</span><span>Объём работ</span><span>Формат</span><span style="text-align:right">Год</span></div>
+    ${rows.map(({ p, i }) => `<a class="rw" href="#${p.id}">
+      <span class="mono">1.${i + 1}</span><span class="th">${im(p.cover, p.name)}</span>
+      <span class="nm"><b>${esc(p.name)}</b><small>${esc(p.kind)}</small>${sw(p)}</span>
+      <span class="ds">${esc(p.title)}</span>
+      <span class="chips ch">${p.scope.map(s => `<span>${esc(s)}</span>`).join('')}</span>
+      <span class="mono fm">${esc(p.category)}</span><span class="yr">${p.year}</span></a>`).join('')}
+  </div>`;
+}
+
+function home() {
+  return `
+<section class="sec" id="intro"><div class="cover-wrap"><div class="cover">
+  <div class="lab mono"><span>0 Введение</span><span>Графический дизайнер · Lead Brand Designer</span><span>6 проектов · 2023—2025</span></div>
+  <div class="specbox"><h1 class="spec">Матвей Воронов</h1><i class="ln a" aria-hidden="true"><span>высота прописных</span></i><i class="ln b" aria-hidden="true"><span>высота строчных</span></i><i class="ln c" aria-hidden="true"><span>базовая линия</span></i></div>
+  <div class="st"><p>Дизайн — это мой способ преобразовывать реальность, делая её доступной, понятной и эстетичной. За каждым успешным проектом всегда стоит чёткое решение конкретной задачи.</p>
+  <div>Этот сайт устроен как руководство по фирменному стилю: оглавление, нумерованные разделы, таблицы и рисунки с подписями. Так же устроены документы, которые получают мои заказчики.</div></div>
+</div></div>
+<div class="pass">
+  <dl class="dl">
+    <div><dt>Роль</dt><dd>Графический дизайнер. В проектах — Lead Brand Designer.</dd></div>
+    <div><dt>Направления</dt><dd>Айдентика, логотипы и брендбуки. SMM-наборы и мерч. Бренд- и коммуникационная стратегия, Tone of Voice. Презентации.</dd></div>
+    <div><dt>Заказчики</dt><dd>Гуманитарные и культурные инициативы, НКО и фонды, стартапы, коммерческие бренды.</dd></div>
+    <div><dt>Образование</dt><dd>${me.education.map(e => `${esc(e[1])} — ${esc(e[2])}, ${e[0]}`).join('<br>')}</dd></div>
+    <div><dt>Ориентиры</dt><dd>Европейский минимализм и русский авангард.</dd></div>
+    <div><dt>Связь</dt><dd><a href="${me.telegram[1]}" target="_blank" rel="noopener">Telegram ${me.telegram[0]}</a> · <span style="user-select:all">${me.email}</span></dd></div>
+  </dl>
+  <figure class="ph"><div class="frame">${im(me.photo, me.name)}</div><figcaption><b>Рис. 0.1</b><span>Матвей Воронов</span></figcaption></figure>
+</div></section>
+
+<section class="sec" id="works">${sh('1', 'Работы', 'Реестр проектов. Строка ведёт на лист проекта; фильтр оставляет работы с нужным объёмом.')}<div id="reg">${registry()}</div></section>
+
+<section class="sec" id="method">${sh('2', 'Принципы и состав работ', 'Три правила из моего описания подхода и таблица того, что входило в каждый проект.')}
+  <div class="rules">
+    <div class="rule"><span class="mono">Правило 2.1 · Задача</span><p>За каждым успешным проектом всегда стоит чёткое решение конкретной задачи.</p></div>
+    <div class="rule"><span class="mono">Правило 2.2 · Функция</span><p>Мои работы — это тщательно выверенные, функциональные ответы на запросы, которые помогают достичь результата.</p></div>
+    <div class="rule"><span class="mono">Правило 2.3 · Значимость</span><p>Я стремлюсь объединить эстетику с практичностью, чтобы каждый проект стал не только красивым, но и значимым.</p></div>
+  </div>
+  <div class="two">
+    <div><span class="mono">Ориентир А</span><b>Европейский минимализм</b>Гармония простоты и утончённости.</div>
+    <div><span class="mono">Ориентир Б</span><b>Русский авангард</b>Символ смелости и эксперимента.</div>
+  </div>
+  <h3 class="mono" style="margin:0 0 10px">Табл. 2.1 — Состав работ по проектам</h3>
+  <div class="scroll"><table class="mx"><thead><tr><th>Результат</th>${P.map((p, i) => `<th title="${esc(p.name)}">1.${i + 1}<br>${esc(p.name.split(' ')[0])}</th>`).join('')}</tr></thead>
+  <tbody>${MATRIX.map(m => `<tr><td>${m[0]}</td>${P.map(p => `<td>${m[1].split(' ').includes(p.id) ? '<span class="dot" title="Входило в проект"></span>' : '<span class="no">—</span>'}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+</section>
+
+<section class="sec" id="reviews">${sh('3', 'Отзывы', 'Оценки заказчиков по двум критериям: точность ТЗ и комфорт общения.')}
+  <div class="sum"><div><span class="mono">Отзывов</span><b>9</b></div><div><span class="mono">Точно составлено ТЗ</span><b>5/5</b></div><div><span class="mono">Комфортное общение</span><b>5/5</b></div><div><span class="mono">Оценок ниже пяти</span><b>0</b></div></div>
+  <div class="scroll"><table class="rv"><thead><tr><th>Задача</th><th>Отзыв</th><th>ТЗ</th><th>Общение</th></tr></thead>
+  <tbody>${MV.reviews.map(r => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>5/5</td><td>5/5</td></tr>`).join('')}</tbody></table></div>
+</section>
+
+<section class="sec" id="brief">${sh('4', 'Бриф и контакты', 'Как я работаю: вы заполняете бриф. Для коммерческих и гражданских проектов он разный.')}
+  <div class="forms">
+    <a class="form" href="${me.briefs[0][1]}" target="_blank" rel="noopener"><span class="mono">Форма 4.1 · Google Forms</span><b>Бриф для коммерческих проектов</b><span class="go">Открыть форму →</span></a>
+    <a class="form" href="${me.briefs[1][1]}" target="_blank" rel="noopener"><span class="mono">Форма 4.2 · Google Forms</span><b>Бриф для гражданских активистов</b><span class="go">Открыть форму →</span></a>
+  </div>
+  <p class="note">Если вам близок такой подход к дизайну и коммуникации — давайте обсудим ваш проект: <a href="${me.telegram[1]}" target="_blank" rel="noopener" style="color:var(--blue)">Telegram ${me.telegram[0]}</a> или <span style="user-select:all">${me.email}</span>.</p>
+</section>`;
+}
+
+function kase(p) {
+  const i = P.indexOf(p), no = `1.${i + 1}`, pv = P[(i + P.length - 1) % P.length], nx = P[(i + 1) % P.length];
+  let s = 0, f = 1, toc = [];
+  const fig = (html, cap, cls = '') => `<figure class="w ${cls}">${html}<figcaption><b>Рис. ${no}.${++f}</b><span>${esc(cap)}</span></figcaption></figure>`;
+  const body = p.blocks.map(b => {
+    const [t, a, c] = b;
+    if (t === 'h') { s++; toc.push([s, c]); return `<h2 id="s${s}"><i>${no}.${s}</i><span>${esc(c)}</span></h2>`; }
+    if (t === 'h3') return `<h3>${esc(a)}</h3>`;
+    if (t === 'p') return `<p>${esc(a)}</p>`;
+    if (t === 'lead') return `<div class="thesis"><span class="mono">Тезис</span><p>${esc(a)}</p></div>`;
+    if (t === 'list') return `<div class="spec-l">${a.map((x, k) => `<div class="${x[0] ? '' : 'nob'}"><i>${String(k + 1).padStart(2, '0')}</i>${x[0] ? `<b>${esc(x[0])}</b>` : ''}<span>${esc(x[1])}</span></div>`).join('')}</div>`;
+    if (t === 'img') return fig(`<div class="frame">${im(a, c)}</div>`, c);
+    if (t === 'imgs') return fig(`<div class="fgrid n${a.length}">${a.map(x => `<div class="frame">${im(x, c)}</div>`).join('')}</div>`, c);
+    if (t === 'figs') return `<div class="fcards w n${a.length}">${a.map(x => `<figure><div class="frame">${im(x[0], x[1])}</div><figcaption><b>Рис. ${no}.${++f}</b><span></span></figcaption><h4>${esc(x[1])}</h4><p>${esc(x[2])}</p></figure>`).join('')}</div>`;
+    if (t === 'metrics') return `<div class="scroll w"><table class="mtb"><thead><tr><th>Показатель</th><th>Значение</th><th>Что изменилось</th></tr></thead><tbody>${a.map(m => `<tr><td>${esc(m[1])}</td><td>${esc(m[0])}</td><td>${esc(m[2])}</td></tr>`).join('')}</tbody></table></div>`;
+    if (t === 'ba') return `<div class="bat w">${a.map(x => `<figure><div class="p"><div class="frame"><span>БЫЛО</span>${im(x[0], 'Было')}</div><div class="frame"><span>СТАЛО</span>${im(x[1], 'Стало')}</div></div><figcaption><b>Рис. ${no}.${++f}</b><span>${esc(x[2])}</span></figcaption></figure>`).join('')}</div>`;
+    return '';
+  }).join('');
+  return `
+<header class="ph1"><span class="n">${no}</span><h1>${esc(p.name)}</h1><p>${esc(p.title)}</p></header>
+<dl class="props">
+  <div><dt>Объём работ</dt><dd>${p.scope.map(esc).join('<br>')}</dd></div>
+  <div><dt>Заказчик</dt><dd>${esc(p.kind)}</dd></div>
+  <div><dt>Формат · год</dt><dd>${esc(p.category)} · ${p.year}</dd></div>
+  <div><dt>Роль</dt><dd>${esc(p.role)}</dd></div>
+  <div><dt>Статус</dt><dd><span class="ok">Завершён</span></dd></div>
+  <div><dt>Цвета проекта</dt><dd><span class="pal">${[p.pal.bg, p.pal.ac, p.pal.fg].map(c => `<i style="background:${c}"></i>`).join('')}</span></dd></div>
+  <div><dt>Разделов</dt><dd id="cs"></dd></div>
+  <div><dt>Рисунков</dt><dd id="cf"></dd></div>
+</dl>
+<figure><div class="frame">${im(p.cover, p.name)}</div><figcaption><b>Рис. ${no}.1</b><span>${esc(p.name)}: обложка проекта</span></figcaption></figure>
+<div class="lay">
+  <div class="doc"><p class="intro">${esc(p.lead)}</p>${body}</div>
+  <aside class="onp"><span class="mono">На этом листе</span><ol>${toc.map(x => `<li><a href="#s${x[0]}" data-anchor>${no}.${x[0]} ${esc(x[1])}</a></li>`).join('')}</ol></aside>
+</div>
+<nav class="pager" aria-label="Соседние проекты">
+  <a href="#${pv.id}"><span class="mono">← Предыдущий · 1.${P.indexOf(pv) + 1}</span><b>${esc(pv.name)}</b></a>
+  <a href="#${nx.id}"><span class="mono">Следующий · 1.${P.indexOf(nx) + 1} →</span><b>${esc(nx.name)}</b></a>
+</nav>
+<script type="x">${s}|${f}<\/script>`;
+}
+
+const app = document.getElementById('app'), side = document.getElementById('side');
+function route(ev) {
+  const h = location.hash.slice(1), p = P.find(x => x.id === h), sec = SECS.find(x => x[0] === h);
+  if (/^s\d+$/.test(h)) return;
+  if (p) {
+    app.innerHTML = kase(p) + foot(); app.dataset.v = p.id; scrollTo(0, 0);
+    const [s, f] = app.querySelector('script[type=x]').textContent.split('|');
+    document.getElementById('cs').textContent = s; document.getElementById('cf').textContent = f;
+  } else {
+    if (app.dataset.v !== 'home') { app.innerHTML = home() + foot(); app.dataset.v = 'home'; metrics(); }
+    if (sec) requestAnimationFrame(() => document.getElementById(h)?.scrollIntoView()); else scrollTo(0, 0);
+  }
+  const cur = p ? p.id : (sec ? h : 'intro');
+  document.getElementById('toc').innerHTML = SECS.map(x => `<li><a href="#${x[0]}" ${cur === x[0] ? 'aria-current="true"' : ''}><i>${x[1]}</i>${x[2]}</a>${x[0] === 'works' ? `<ul>${P.map((q, i) => `<li><a href="#${q.id}" ${cur === q.id ? 'aria-current="page"' : ''}><i>1.${i + 1}</i>${esc(q.name)}</a></li>`).join('')}</ul>` : ''}</li>`).join('');
+  document.getElementById('crumbs').innerHTML = p ? `<a href="#intro">Руководство</a> / <a href="#works">1 Работы</a> / <b>1.${P.indexOf(p) + 1} ${esc(p.name)}</b>` : `<a href="#intro">Руководство</a> / <b>${(sec || SECS[0])[1]} ${(sec || SECS[0])[2]}</b>`;
+  document.getElementById('pbar').innerHTML = `<span>Прототип · концепция 2 из 3</span><a href="concept-1.html#${p ? h : ''}">1 Плакат</a><a href="concept-2.html#${p ? h : ''}" aria-current="page">2 Регламент</a><a href="concept-3.html#${p ? h : ''}">3 Сцена</a><a class="sp" href="index.html">← Обзор и сравнение</a>`;
+  document.title = (p ? p.name + ' — ' : '') + 'Регламент — концепция 2';
+  side.classList.remove('open');
+}
+const foot = () => `<footer class="foot mono"><span>${me.name} · руководство, ред. 11.2026</span><span>Набрано шрифтами Geologica и IBM Plex</span></footer>`;
+document.addEventListener('click', e => {
+  const fb = e.target.closest('[data-f]');
+  if (fb) { filter = fb.dataset.f; document.getElementById('reg').innerHTML = registry(); return; }
+  const an = e.target.closest('a[data-anchor]');
+  if (an) { e.preventDefault(); document.querySelector(an.getAttribute('href'))?.scrollIntoView(); return; }
+  const a = e.target.closest('a[href^="#"]');
+  if (a && a.getAttribute('href').slice(1) === location.hash.slice(1)) { e.preventDefault(); route(); }
+  if (!e.target.closest('#side') && !e.target.closest('#mbtn')) side.classList.remove('open');
+});
+document.getElementById('mbtn').onclick = () => side.classList.toggle('open');
+const gb = document.getElementById('gbtn'), go = document.getElementById('gridov');
+gb.onclick = () => { go.hidden = !go.hidden; gb.setAttribute('aria-pressed', String(!go.hidden)); };
+function metrics() {
+  const box = document.querySelector('.specbox'); if (!box) return;
+  const c = document.createElement('canvas').getContext('2d'); c.font = '200 100px Geologica';
+  const M = c.measureText('М'), x = c.measureText('х'), asc = M.fontBoundingBoxAscent, desc = M.fontBoundingBoxDescent;
+  if (!asc) return; const base = (100 - (asc + desc)) / 2 + asc;
+  box.style.setProperty('--base', base / 100 + 'em'); box.style.setProperty('--cap', (base - M.actualBoundingBoxAscent) / 100 + 'em'); box.style.setProperty('--xh', (base - x.actualBoundingBoxAscent) / 100 + 'em');
+}
+document.fonts?.ready.then(metrics);
+let spyOff = 0;
+function spy() {
+  if (app.dataset.v !== 'home' || Date.now() < spyOff) return;
+  let cur = SECS[0];
+  for (const x of SECS) { const el = document.getElementById(x[0]); if (el && el.getBoundingClientRect().top < innerHeight * .4) cur = x; }
+  document.querySelectorAll('#toc a').forEach(a => a.getAttribute('href') === '#' + cur[0] ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));
+  document.getElementById('crumbs').innerHTML = `<a href="#intro">Руководство</a> / <b>${cur[1]} ${cur[2]}</b>`;
+}
+addEventListener('scroll', spy, { passive: true });
+addEventListener('hashchange', route); route();
+</script>
+</body>
+</html>

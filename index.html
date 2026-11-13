@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Три концепции сайта Воронова</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Обзор: спокойный рабочий документ арт-директора. Три концепции показаны кадрами и ведут в живые прототипы. */
+:root{
+  --bg:#F4F5F6; --card:#FFFFFF; --fg:#101216; --mute:#5A616D; --line:#D8DBE0; --accent:#1C3FD6; --good:#12784A; --warn:#A8510B; --chip:#E9EBEF;
+  --head:'Geologica','Segoe UI',system-ui,sans-serif; --text:'Golos Text','Segoe UI',system-ui,sans-serif; --mono:'JetBrains Mono','SFMono-Regular',Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1013;--card:#17191D;--fg:#ECEDEF;--mute:#9CA2AD;--line:#2B2E35;--accent:#93A5FF;--good:#5FCB97;--warn:#F0A460;--chip:#22252B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1013;--card:#17191D;--fg:#ECEDEF;--mute:#9CA2AD;--line:#2B2E35;--accent:#93A5FF;--good:#5FCB97;--warn:#F0A460;--chip:#22252B;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0}img{max-width:100%}
+body{background:var(--bg);color:var(--fg);font:400 16.5px/1.6 var(--text)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.w{max-width:1180px;margin-inline:auto;padding-left:max(clamp(16px,4vw,44px),env(safe-area-inset-left,0px));padding-right:max(clamp(16px,4vw,44px),env(safe-area-inset-right,0px))}
+.mono{font:500 11.5px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+h1,h2,h3{font-family:var(--head);font-weight:300;letter-spacing:-.015em;text-wrap:balance;margin:0}
+h1{font-size:clamp(36px,5.6vw,68px);line-height:1.02}
+h2{font-size:clamp(28px,3.4vw,42px);line-height:1.08}
+h3{font-size:clamp(21px,2vw,26px);line-height:1.15;font-weight:400}
+p{margin:0 0 .9em;max-width:66ch}
+.top{padding-block:clamp(28px,5vw,64px) clamp(20px,3vw,36px)}
+.top p{font-size:clamp(17px,1.5vw,20px);color:var(--mute);margin-top:18px;max-width:58ch}
+.jump{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.6vw,20px);margin-top:clamp(22px,3vw,36px)}
+.jump a{display:flex;flex-direction:column;text-decoration:none;background:var(--card);border:1px solid var(--line);transition:border-color .2s,transform .2s}
+.jump a:hover{border-color:var(--fg);transform:translateY(-2px)}
+.jump img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;border-bottom:1px solid var(--line)}
+.jump div{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px}
+.jump b{font:400 22px/1.1 var(--head)}
+.jump span.d{font-size:14.5px;color:var(--mute);line-height:1.4}
+.sec{padding-block:clamp(30px,5vw,68px);border-top:1px solid var(--line)}
+.sec>.w>.mono{display:block;margin-bottom:10px}
+.sec h2{margin-bottom:clamp(16px,2.4vw,28px)}
+.two{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,4vw,56px);align-items:start}
+.pos{font:300 clamp(21px,2.3vw,30px)/1.25 var(--head);max-width:26em;margin-bottom:.8em}
+ul.l{margin:0 0 1em;padding:0;list-style:none}
+ul.l li{position:relative;padding:9px 0 9px 22px;border-top:1px solid var(--line);font-size:15.5px;line-height:1.5}
+ul.l li::before{content:"";position:absolute;left:2px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--mute)}
+ul.l.g li::before{background:var(--good)}ul.l.r li::before{background:var(--warn)}
+ul.l b{font-weight:600}
+.box{background:var(--card);border:1px solid var(--line);padding:16px 18px 6px}
+.box h3{margin-bottom:10px}
+.tw{overflow-x:auto;border:1px solid var(--line);background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th,td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+thead th{font:500 11.5px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid var(--fg);white-space:nowrap}
+.pt td:first-child{white-space:nowrap;font-weight:600}
+.cmp th:first-child,.cmp td:first-child{width:17%;min-width:140px;font:500 11.5px/1.5 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
+.cmp td{min-width:210px}
+.cmp thead th:not(:first-child){font:400 19px/1.1 var(--head);letter-spacing:-.01em;text-transform:none;color:var(--fg)}
+.sc{font:500 13px/1 var(--mono);white-space:nowrap}
+.sc i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--line);margin-right:3px}
+.sc i.on{background:var(--fg)}
+
+.c{padding-block:clamp(26px,4vw,56px);border-top:1px solid var(--line)}
+.c:first-of-type{border-top:0;padding-top:0}
+.ch{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(14px,3vw,36px);align-items:start;margin-bottom:clamp(16px,2.4vw,28px)}
+.ch .n{font:300 clamp(64px,9vw,128px)/.8 var(--head);letter-spacing:-.05em;color:var(--mute)}
+.ch h3{font-size:clamp(30px,4vw,52px);font-weight:300;line-height:1}
+.ch p{margin:10px 0 0;font-size:clamp(17px,1.6vw,21px);max-width:44ch}
+.sw{display:flex;gap:0;margin-top:14px}.sw i{width:38px;height:14px;border:1px solid var(--line)}.sw i+i{border-left:0}
+.shots{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.46fr);gap:clamp(8px,1.2vw,16px);align-items:stretch;margin-bottom:clamp(16px,2.4vw,26px)}
+.shots a{display:block;position:relative;border:1px solid var(--line);background:var(--card);overflow:hidden;text-decoration:none}
+.shots a:hover{border-color:var(--fg)}
+.shots img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.shots .d{aspect-ratio:16/10}
+.shots .m{grid-row:1/3;grid-column:3}
+.shots .wide{grid-column:1/3}
+.shots span{position:absolute;left:8px;bottom:8px;background:rgba(16,18,22,.86);color:#fff;font:500 10.5px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:6px 7px}
+.cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3.5fr) minmax(0,3.5fr);gap:clamp(16px,3vw,40px);align-items:start}
+dl{margin:0}
+dl div{border-top:1px solid var(--line);padding:9px 0 11px}
+dt{font:500 11.5px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--mute);margin-bottom:3px}
+dd{margin:0;font-size:15.5px;line-height:1.5}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(14px,2vw,22px)}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font:500 14.5px/1 var(--text);padding:13px 16px;border:1px solid var(--fg);background:var(--fg);color:var(--bg)}
+.btn.o{background:transparent;color:var(--fg)}
+.btn:hover{opacity:.86}
+.rec{background:var(--card);border:1px solid var(--fg);padding:clamp(18px,3vw,36px)}
+.rec h3{font-size:clamp(26px,3.2vw,40px);font-weight:300;margin:8px 0 14px}
+.rec .two{margin-top:18px}
+ol.st{margin:0;padding:0;list-style:none;counter-reset:s}
+ol.st li{counter-increment:s;position:relative;padding:9px 0 9px 34px;border-top:1px solid var(--line);font-size:15.5px;line-height:1.5}
+ol.st li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:11px;font:500 11.5px/1.6 var(--mono);color:var(--mute)}
+.foot{padding-block:22px 40px;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
+@media (max-width:860px){
+  .jump,.two,.cols{grid-template-columns:minmax(0,1fr)}
+  .shots{grid-template-columns:minmax(0,1fr) minmax(0,.5fr)}
+  .shots .m{grid-column:2;grid-row:1/3}.shots .wide{grid-column:1/3}
+  .ch{grid-template-columns:minmax(0,1fr)}.ch .n{font-size:56px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="w">
+  <span class="mono">Арт-дирекшен · ноябрь 2026 · по портфолио в Notion</span>
+  <h1 style="margin-top:14px">Три концепции сайта-портфолио для Матвея Воронова</h1>
+  <p>Три самостоятельных ответа на вопрос, каким должен быть сайт. Каждый собран как рабочий прототип: главная, шесть кейсов, навигация, мобильная версия. Тексты и изображения взяты из вашего портфолио.</p>
+  <nav class="jump" aria-label="Прототипы">
+    <a href="concept-1.html"><img src="assets/shot-c1-home.jpg" alt="Концепция «Плакат», главная" width="800" height="505"><div><span class="mono">Концепция 1</span><b>Плакат</b><span class="d">Голос автора. Крупная типографика, цвет приносят сами проекты.</span></div></a>
+    <a href="concept-2.html"><img src="assets/shot-c2-home.jpg" alt="Концепция «Регламент», главная" width="800" height="505"><div><span class="mono">Концепция 2</span><b>Регламент</b><span class="d">Метод. Сайт устроен как брендбук: оглавление, таблицы, рисунки.</span></div></a>
+    <a href="concept-3.html"><img src="assets/shot-c3-home.jpg" alt="Концепция «Сцена», главная" width="800" height="500"><div><span class="mono">Концепция 3</span><b>Сцена</b><span class="d">Работа в луче света. Тёмный зал, крупные кадры, минимум текста.</span></div></a>
+  </nav>
+</div></header>
+
+<section class="sec" id="analysis"><div class="w">
+  <span class="mono">1 · Анализ</span>
+  <h2>Что складывается из портфолио</h2>
+  <div class="two">
+    <div>
+      <p class="pos">Вы — дизайнер бренд-систем для организаций, которым нужно доверие: гуманитарных и культурных инициатив, фондов, НКО, гражданских проектов.</p>
+      <p>Это моя формулировка, в исходнике её нет. Она следует из состава работ: четыре проекта из шести сделаны для некоммерческих и общественных организаций, а на главной стоит отдельный бриф для гражданских активистов. Коммерческие проекты (чай, стартап) показывают, что метод переносится и на бизнес.</p>
+      <p>Самое сильное в работах — система, а не отдельная картинка. В Resilience Initiative и SALT вы сдаёте голос бренда, палитру, шрифты, иконки, конструктор для соцсетей и шаблоны документов, и всё это рассчитано на то, что команда и волонтёры дальше справятся сами. Управленческое образование здесь работает на вас: кейсы 2025 года написаны языком задачи и результата.</p>
+      <div class="tw" style="margin-top:18px"><table class="pt">
+        <thead><tr><th>Проект</th><th>Что сделано</th><th>Формат</th><th>Год</th></tr></thead>
+        <tbody>
+          <tr><td>Resilience Initiative</td><td>Брендбук и дизайн-система гуманитарной инициативы</td><td>Коммерческий</td><td>2025</td></tr>
+          <tr><td>SALT</td><td>Визуальная система и бренд-стратегия культурного сообщества</td><td>Коммерческий</td><td>2025</td></tr>
+          <tr><td>Федерация адаптивного спорта</td><td>Логотип и айдентика, Ингушетия</td><td>Благотворительный</td><td>2025</td></tr>
+          <tr><td>Taiwan Mountain Essence</td><td>Три концепта логотипа для чайного бренда</td><td>Коммерческий</td><td>2025</td></tr>
+          <tr><td>Киберправда</td><td>Редизайн презентации для инвесторов и логотип</td><td>Поддержка стартапа</td><td>2024</td></tr>
+          <tr><td>Сердце Кольского</td><td>Название, логотип и брендбук</td><td>Благотворительный</td><td>2023</td></tr>
+        </tbody></table></div>
+    </div>
+    <div>
+      <div class="box" style="margin-bottom:14px"><h3>Сильные стороны</h3><ul class="l g">
+        <li><b>Смысл раньше графики.</b> В SALT строчные буквы означают равенство, а заглавная работает как софит. Это редкий уровень идеи.</li>
+        <li><b>Слово и структура.</b> Нейминг «Сердце Кольского», Tone of Voice, переписанная презентация «Киберправды».</li>
+        <li><b>Культурный такт.</b> Айдентика для Ингушетии соединяет солярный знак, восьмиконечную звезду и дуги Паралимпийского движения.</li>
+        <li><b>Отзывы.</b> Девять оценок, все пять из пяти за точность ТЗ и за общение.</li>
+      </ul></div>
+      <div class="box"><h3>Что сейчас мешает</h3><ul class="l r">
+        <li><b>Notion вместо собственного лица.</b> Дизайнер систем показан в чужом интерфейсе.</li>
+        <li><b>Одинаковые цифры в двух кейсах</b> (×2,5–3, +40–60%, 100%) без способа подсчёта. Профессиональный заказчик заметит повтор.</li>
+        <li><b>Мало реального внедрения.</b> Много мокапов, часть из них, судя по именам файлов, сгенерирована. Живое подтверждение одно — эфир ГТРК, и оно стоит в конце кейса.</li>
+        <li><b>Отзывы картинкой.</b> GIF не читается с телефона и не находится поиском.</li>
+        <li><b>Неровная редактура.</b> Опечатки в заголовках («ИнгушетияЁ»), три разных формата кейсов, «Как я работаю» из одного шага, абзац про ожидание фидбека.</li>
+      </ul></div>
+    </div>
+  </div>
+  <p style="margin-top:22px;color:var(--mute);font-size:15px">Все страницы портфолио открылись. Не использованы: PDF брендбука «Сердце Кольского» и часть слайдов «Киберправды». Абзац про ожидание фидбека в прототипы не включён. Опечатки в цитируемых заголовках исправлены.</p>
+</div></section>
+
+<section class="sec" id="concepts"><div class="w">
+  <span class="mono">2 · Концепции</span>
+  <h2>Три решения</h2>
+
+  <article class="c">
+    <div class="ch"><span class="n">1</span><div><h3>Плакат</h3><p>Сайт как серия плакатов. Вы назвали два ориентира, минимализм и авангард, и здесь они становятся конструкцией страницы.</p><div class="sw" aria-hidden="true"><i style="background:#EFEFEA"></i><i style="background:#0C0C0D"></i><i style="background:#F2C84B"></i><i style="background:#0B6B2B"></i><i style="background:#D9410B"></i><i style="background:#33B9C4"></i></div></div></div>
+    <div class="shots">
+      <a class="d" href="concept-1.html"><img src="assets/shot-c1-home.jpg" alt="Плакат: первый экран" width="800" height="505" loading="lazy"><span>Главная</span></a>
+      <a class="d" href="concept-1.html#salt"><img src="assets/shot-c1-case.jpg" alt="Плакат: кейс SALT" width="800" height="500" loading="lazy"><span>Кейс SALT</span></a>
+      <a class="m" href="concept-1.html"><img src="assets/shot-c1-m.jpg" alt="Плакат: телефон" width="780" height="1688" loading="lazy"><span>Телефон</span></a>
+      <a class="d wide" href="concept-1.html" style="aspect-ratio:16/6.4"><img src="assets/shot-c1-works.jpg" alt="Плакат: композиция из шести фигур" width="800" height="500" loading="lazy"><span>Шесть проектов — шесть фигур</span></a>
+    </div>
+    <div class="cols">
+      <dl>
+        <div><dt>Стратегия</dt><dd>Показать автора с позицией. Первая фраза сайта — ваша: «Дизайн — это мой способ преобразовывать реальность».</dd></div>
+        <div><dt>Навигация</dt><dd>Композиция из шести фигур, каждая собрана из цветов проекта и ведёт в его кейс. Ниже лента полос-плакатов. На телефоне — полноэкранное меню крупным кеглем.</dd></div>
+        <div><dt>Кейс</dt><dd>Шапка в цветах проекта, гигантское название, тезисы на всю ширину, метрики крупными цифрами.</dd></div>
+        <div><dt>Визуальный язык</dt><dd>Сверхузкий жирный гротеск, бумага и чёрный. Собственного акцентного цвета у сайта нет: цвет приносят работы.</dd></div>
+      </dl>
+      <div><span class="mono">Сильные стороны</span><ul class="l g" style="margin-top:8px">
+        <li>Запоминается с первого экрана, не похож на шаблон.</li>
+        <li>Опирается на знаки и цвета проектов, то есть на самое сильное в работах.</li>
+        <li>Сам сайт доказывает владение типографикой.</li>
+      </ul></div>
+      <div><span class="mono">Слабые стороны</span><ul class="l r" style="margin-top:8px">
+        <li>Громкий тон подойдёт не каждому фонду.</li>
+        <li>Зависит от шрифта: с другой гарнитурой эффект пропадёт.</li>
+        <li>Длинные названия проектов требуют ручной подгонки кегля.</li>
+      </ul></div>
+    </div>
+    <div class="acts"><a class="btn" href="concept-1.html">Открыть главную</a><a class="btn o" href="concept-1.html#salt">Кейс SALT</a><a class="btn o" href="concept-1.html#ri">Кейс Resilience Initiative</a></div>
+  </article>
+
+  <article class="c">
+    <div class="ch"><span class="n">2</span><div><h3>Регламент</h3><p>Сайт устроен как руководство по фирменному стилю. Заказчик видит тот же тип документа, который получит в конце работы.</p><div class="sw" aria-hidden="true"><i style="background:#F3F5F8"></i><i style="background:#FFFFFF"></i><i style="background:#0D1320"></i><i style="background:#1C3FD6"></i><i style="background:#E7ECFB"></i></div></div></div>
+    <div class="shots">
+      <a class="d" href="concept-2.html"><img src="assets/shot-c2-home.jpg" alt="Регламент: титульный лист" width="800" height="505" loading="lazy"><span>Главная</span></a>
+      <a class="d" href="concept-2.html#salt"><img src="assets/shot-c2-case.jpg" alt="Регламент: лист проекта SALT" width="800" height="500" loading="lazy"><span>Кейс SALT</span></a>
+      <a class="m" href="concept-2.html#works"><img src="assets/shot-c2-m.jpg" alt="Регламент: телефон" width="780" height="1688" loading="lazy"><span>Телефон</span></a>
+      <a class="d wide" href="concept-2.html#works" style="aspect-ratio:16/6.4"><img src="assets/shot-c2-works.jpg" alt="Регламент: реестр работ с фильтром" width="800" height="500" loading="lazy"><span>Реестр работ с фильтром</span></a>
+    </div>
+    <div class="cols">
+      <dl>
+        <div><dt>Стратегия</dt><dd>Показать метод. Руководителю фонда важнее понять, что он получит и в каком порядке, чем впечатлиться.</dd></div>
+        <div><dt>Навигация</dt><dd>Постоянное оглавление слева с нумерацией разделов, хлебные крошки, реестр работ с фильтром по объёму. На телефоне оглавление выезжает сбоку.</dd></div>
+        <div><dt>Кейс</dt><dd>Лист проекта: таблица свойств, нумерованные разделы и рисунки, метрики таблицей, содержание листа справа.</dd></div>
+        <div><dt>Визуальный язык</dt><dd>Лёгкий геометрический гротеск, моноширинные подписи, чертёжный синий. Кнопка «Сетка 12» показывает модульную сетку страницы.</dd></div>
+      </dl>
+      <div><span class="mono">Сильные стороны</span><ul class="l g" style="margin-top:8px">
+        <li>Быстрее всего отвечает на вопрос «что входит в работу»: есть таблица состава по проектам.</li>
+        <li>Спокойный тон уместен для грантодателей и институций.</li>
+        <li>Легко растёт: новый кейс добавляется строкой.</li>
+      </ul></div>
+      <div><span class="mono">Слабые стороны</span><ul class="l r" style="margin-top:8px">
+        <li>Суховат: эмоцию дают только изображения работ.</li>
+        <li>Жанр документации знаком по продуктовым сайтам, удивляет меньше.</li>
+        <li>Таблицы требуют дисциплины в данных по каждому проекту.</li>
+      </ul></div>
+    </div>
+    <div class="acts"><a class="btn" href="concept-2.html">Открыть главную</a><a class="btn o" href="concept-2.html#salt">Кейс SALT</a><a class="btn o" href="concept-2.html#kp">Кейс «Киберправда»</a></div>
+  </article>
+
+  <article class="c">
+    <div class="ch"><span class="n">3</span><div><h3>Сцена</h3><p>Тёмный зал и работа в луче света. Образ взят из SALT, где чёрный назван цветом кулис, а шафрановый — лучом софита.</p><div class="sw" aria-hidden="true"><i style="background:#0B0B0D"></i><i style="background:#151517"></i><i style="background:#EFEAE0"></i><i style="background:#FFC20E"></i><i style="background:#F0483A"></i><i style="background:#33B9C4"></i></div></div></div>
+    <div class="shots">
+      <a class="d" href="concept-3.html"><img src="assets/shot-c3-home.jpg" alt="Сцена: первый экран" width="800" height="500" loading="lazy"><span>Главная</span></a>
+      <a class="d" href="concept-3.html#salt"><img src="assets/shot-c3-case.jpg" alt="Сцена: кейс SALT" width="800" height="500" loading="lazy"><span>Кейс SALT</span></a>
+      <a class="m" href="concept-3.html"><img src="assets/shot-c3-m.jpg" alt="Сцена: телефон" width="780" height="1688" loading="lazy"><span>Телефон</span></a>
+      <a class="d wide" href="concept-3.html#bill" style="aspect-ratio:16/6.4"><img src="assets/shot-c3-works.jpg" alt="Сцена: афиша проектов" width="800" height="500" loading="lazy"><span>Афиша</span></a>
+    </div>
+    <div class="cols">
+      <dl>
+        <div><dt>Стратегия</dt><dd>Дать работам говорить первыми. Сначала впечатление, текст по запросу.</dd></div>
+        <div><dt>Навигация</dt><dd>Первый экран — сцена: проекты сменяют друг друга, справа афиша из шести названий, внизу шкала. Работают стрелки клавиатуры и свайп. Цвет акцента меняется вместе с проектом.</dd></div>
+        <div><dt>Кейс</dt><dd>Разворот: текст главы стоит слева, кадры идут справа. Метрики курсивом в цвете проекта.</dd></div>
+        <div><dt>Визуальный язык</dt><dd>Курсивная антиква в заголовках и Jost в интерфейсе: этот шрифт вы сами выбрали для двух проектов.</dd></div>
+      </dl>
+      <div><span class="mono">Сильные стороны</span><ul class="l g" style="margin-top:8px">
+        <li>Самый «дорогой» вид, хорошо продаёт коммерческим и премиальным брендам.</li>
+        <li>Портрет и тёмные изображения работ получают лучшую подачу.</li>
+        <li>Акцент, меняющийся от проекта к проекту, связывает сайт с работами.</li>
+      </ul></div>
+      <div><span class="mono">Слабые стороны</span><ul class="l r" style="margin-top:8px">
+        <li>Крупный кадр обнажает сгенерированные мокапы. Нужны настоящие фотографии внедрения.</li>
+        <li>Тёмная тема и автосмена слайдов хуже для чтения и доступности.</li>
+        <li>Системность, главное ваше преимущество, видна слабее всего.</li>
+      </ul></div>
+    </div>
+    <div class="acts"><a class="btn" href="concept-3.html">Открыть главную</a><a class="btn o" href="concept-3.html#salt">Кейс SALT</a><a class="btn o" href="concept-3.html#tme">Кейс Taiwan Mountain Essence</a></div>
+  </article>
+</div></section>
+
+<section class="sec" id="compare"><div class="w">
+  <span class="mono">3 · Сравнение</span>
+  <h2>Чем они отличаются</h2>
+  <p style="margin-bottom:18px">В каждом прототипе сверху есть полоса переключения. Она переносит на ту же страницу в соседней концепции, поэтому один кейс можно посмотреть в трёх решениях подряд.</p>
+  <div class="tw"><table class="cmp">
+    <thead><tr><th></th><th>1 · Плакат</th><th>2 · Регламент</th><th>3 · Сцена</th></tr></thead>
+    <tbody>
+      <tr><td>Что продаёт</td><td>Автора и его взгляд</td><td>Метод и состав работы</td><td>Впечатление от работ</td></tr>
+      <tr><td>Кому ближе</td><td>Культурным и гражданским инициативам, дизайн-сообществу</td><td>Фондам, НКО, грантодателям, стартапам</td><td>Коммерческим и премиальным брендам</td></tr>
+      <tr><td>Навигация</td><td>Фигуры-проекты и лента плакатов</td><td>Оглавление, реестр, фильтр</td><td>Сцена со сменой проектов и афиша</td></tr>
+      <tr><td>Подача кейса</td><td>Плакатная: тезис и цифра крупно</td><td>Документ: свойства, разделы, рисунки</td><td>Разворот: текст стоит, кадры идут</td></tr>
+      <tr><td>Нагрузка на контент</td><td>Средняя. Нужны чистые знаки и короткие тезисы</td><td>Высокая. Нужны выверенные данные по каждому проекту</td><td>Высокая. Нужны сильные настоящие фотографии</td></tr>
+      <tr><td>Визуальная сила</td><td><span class="sc"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i> 5/5</span></td><td><span class="sc"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i> 3/5</span></td><td><span class="sc"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i> 4/5</span></td></tr>
+      <tr><td>Позиционирование</td><td><span class="sc"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i> 4/5</span></td><td><span class="sc"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i> 5/5</span></td><td><span class="sc"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i> 3/5</span></td></tr>
+      <tr><td>Коммерческий потенциал</td><td><span class="sc"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i> 4/5</span></td><td><span class="sc"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i> 4/5</span></td><td><span class="sc"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i> 3/5</span></td></tr>
+      <tr><td>Удобство на телефоне</td><td>Хорошее: одна лента, крупные зоны нажатия</td><td>Хорошее: реестр превращается в карточки</td><td>Среднее: афиша скрыта, остаётся свайп</td></tr>
+    </tbody></table></div>
+  <p style="margin-top:12px;color:var(--mute);font-size:14.5px">Оценки — моё экспертное суждение, не результат тестов на пользователях.</p>
+</div></section>
+
+<section class="sec" id="verdict"><div class="w">
+  <span class="mono">4 · Рекомендация</span>
+  <h2>Что бы я выбрал</h2>
+  <div class="rec">
+    <span class="mono">Основа</span>
+    <h3>Концепция 1, «Плакат», с двумя заимствованиями из «Регламента»</h3>
+    <p>«Плакат» сильнее остальных визуально и при этом честен по отношению к материалу. Он строится на знаках, цветах и словах проектов, а это лучшее, что есть в портфолио. Мокапы уходят на второй план. Сайт сам становится доказательством того, что вы умеете работать с типографикой и системой, и связывает заявленные ориентиры с практикой.</p>
+    <p>«Регламент» точнее всех в позиционировании, но проигрывает в запоминаемости. «Сцена» эффектна, однако опирается на самое слабое место портфолио — на фотографии и мокапы.</p>
+    <div class="two">
+      <div><span class="mono">Перенести из «Регламента»</span><ol class="st" style="margin-top:8px">
+        <li>Реестр работ с фильтром по объёму: вторая точка входа для тех, кто ищет конкретную услугу.</li>
+        <li>Таблицу «Состав работ по проектам» и блок свойств в шапке кейса.</li>
+      </ol></div>
+      <div><span class="mono">Сделать до запуска</span><ol class="st" style="margin-top:8px">
+        <li>Проверить метрики: указать, как они получены, или заменить словами клиентов.</li>
+        <li>Поднять вверх кейса «Сердце Кольского» кадры из эфира и добавить реальные фото внедрения в остальные.</li>
+        <li>Привести кейсы к одной структуре, исправить опечатки, набрать отзывы текстом.</li>
+        <li>Дописать «Как я работаю» дальше первого шага и добавить английскую версию: часть заказчиков международные.</li>
+      </ol></div>
+    </div>
+    <div class="acts"><a class="btn" href="concept-1.html">Открыть «Плакат»</a><a class="btn o" href="concept-2.html#works">Реестр из «Регламента»</a></div>
+  </div>
+</div></section>
+
+<footer class="foot"><div class="w">Прототипы статичны: формы брифа ведут на ваши Google Forms, контакты взяты из портфолио. Все три концепции используют общий файл с текстами шести кейсов.</div></footer>
+</body>
+</html>
