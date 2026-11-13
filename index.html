@@ -212,6 +212,8 @@ figcaption{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:u
 .next .top{display:flex;justify-content:space-between;border-top:2px solid currentColor;padding-top:10px}
 .next h3{font:900 12vw/.82 var(--display);text-transform:uppercase;margin:.08em 0 .14em;overflow-wrap:anywhere;text-wrap:balance}
 
+/* типографика: без висячих строк (в JS — неразрывные пробелы, здесь — запасной перенос) */
+p,li,q,dd,figcaption{text-wrap:pretty}
 @media (max-width:860px){
   body{font-size:16px}
   .hd nav,.hd .rl{display:none}.hd .mbtn{display:block;margin-left:0}.hd .in{gap:10px}.tbtn{margin-left:auto;padding:10px 11px}.tbtn .x{display:none}
@@ -291,7 +293,7 @@ function home() {
     <span class="row2"><span class="fitline"><span data-fit>реальность,</span></span><span class="hero-post">делая её доступной, понятной и&nbsp;эстетичной.</span></span>
   </h1>
   <div class="hero-meta">
-    <p><b>Матвей Воронов</b> — графический дизайнер. За каждым успешным проектом всегда стоит чёткое решение конкретной задачи.</p>
+    <p><b>Матвей Воронов</b>, графический дизайнер. Сначала я выясняю, какую задачу должен решить проект, и только потом берусь за форму.</p>
     <p class="mono" style="line-height:1.7">Айдентика · Логотипы · Брендбуки · SMM-наборы и мерч · Бренд- и коммуникационная стратегия · Презентации</p>
     <a class="cta" href="#brief" data-sec>Заполнить бриф <i>↓</i></a>
   </div>
@@ -322,7 +324,7 @@ function home() {
 </div></section>
 <section class="rev wrap" id="reviews">
   <div class="sect-h" style="margin-bottom:clamp(20px,3vw,40px)"><h2>Отзывы</h2><span class="mono">Оценки заказчиков</span></div>
-  <div class="big"><div class="n">9/9</div><p>Девять отзывов — и в каждом по пять звёзд за точность ТЗ и за комфортное общение.</p></div>
+  <div class="big"><div class="n">9/9</div><p>Девять отзывов, и в каждом пять звёзд: за точность в выполнении ТЗ и за приятную работу.</p></div>
   <ul>${MV.reviews.map(r => `<li><span class="mono">${esc(r[0])}</span><q>${esc(r[1])}</q></li>`).join('')}</ul>
 </section>
 <section id="brief">
@@ -379,7 +381,7 @@ function kase(p) {
 }
 
 function footer() {
-  return `<footer class="ft"><div class="in wrap"><b>${me.name}</b><a href="${me.telegram[1]}" target="_blank" rel="noopener">Telegram ${me.telegram[0]}</a><span class="mono" style="text-transform:none;user-select:all">${me.email}</span><span class="r">Если вам близок такой подход к дизайну и коммуникации — давайте обсудим ваш проект.</span></div></footer>`;
+  return `<footer class="ft"><div class="in wrap"><b>${me.name}</b><a href="${me.telegram[1]}" target="_blank" rel="noopener">Telegram ${me.telegram[0]}</a><span class="mono" style="text-transform:none;user-select:all">${me.email}</span><span class="r">Если вам подходит такой взгляд на дизайн, давайте обсудим ваш проект.</span></div></footer>`;
 }
 
 function fit() {
@@ -388,6 +390,23 @@ function fit() {
     const w = el.parentElement.clientWidth, sw = el.getBoundingClientRect().width;
     if (sw) el.style.fontSize = (100 * w / sw * .995) + 'px';
   });
+}
+/* Русская типографика: неразрывные пробелы после коротких предлогов и союзов,
+   перед тире и частицами, между числом и словом, и последние два слова абзаца — вместе (нет висячих строк). */
+const NB = ' ', LET = 'А-Яа-яЁёA-Za-z0-9';
+const PRE = new RegExp(`(^|[^${LET}])(а|в|во|да|до|за|из|и|к|ко|на|над|не|ни|но|о|об|обо|от|по|под|при|про|с|со|у|без|для|или|как|что|то)\\s+`, 'gi');
+function typo(s) {
+  if (!/\S\s+\S/.test(s)) return s;
+  s = s.replace(/\s+([—–])(?=\s)/g, NB + '$1');
+  for (let k = 0; k < 2; k++) s = s.replace(PRE, (m, a, w) => a + w + NB);
+  s = s.replace(new RegExp(`\\s+(бы|б|же|ж|ли)(?![${LET}])`, 'gi'), NB + '$1');
+  s = s.replace(new RegExp(`(\\d)\\s+(?=[А-Яа-яЁёA-Za-z])`, 'g'), '$1' + NB);
+  return s.replace(/([^\s ])[ \t\n]+([^\s ]+)([ \t\n]*)$/, '$1' + NB + '$2$3');
+}
+function typoTree(root) {
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => /^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+  const list = []; while (w.nextNode()) list.push(w.currentNode);
+  list.forEach(n => { const t = typo(n.nodeValue); if (t !== n.nodeValue) n.nodeValue = t; });
 }
 const SECS = ['works', 'about', 'reviews', 'brief'];
 let pending = null;
@@ -402,14 +421,15 @@ function route() {
     if (t) requestAnimationFrame(() => document.getElementById(t)?.scrollIntoView()); else if (!isSec) scrollTo(0, 0);
   }
   app.dataset.home = p ? '' : '1'; theme(p);
+  typoTree(document.body); fit();
   document.title = (p ? p.name + ' — ' : '') + 'Воронов';
 }
 function bindShapes() {
   const cap = document.getElementById('cap'); if (!cap) return; const def = cap.innerHTML;
   document.querySelectorAll('.sh').forEach(a => {
     const p = P[+a.dataset.i];
-    const on = () => cap.innerHTML = `<span class="mono">${nn(+a.dataset.i)} / 06 · ${esc(p.kind)}</span><b>${esc(p.name)}</b><span>${esc(p.title)}</span>`;
-    a.onmouseenter = a.onfocus = on; a.onmouseleave = a.onblur = () => cap.innerHTML = def;
+    const on = () => { cap.innerHTML = `<span class="mono">${nn(+a.dataset.i)} / 06 · ${esc(p.kind)}</span><b>${esc(p.name)}</b><span>${esc(p.title)}</span>`; typoTree(cap); };
+    a.onmouseenter = a.onfocus = on; a.onmouseleave = a.onblur = () => { cap.innerHTML = def; typoTree(cap); };
   });
 }
 document.getElementById('tbtn').onclick = () => { dark = !dark; try { localStorage.setItem('mv-theme', dark ? 'dark' : 'light'); } catch (e) {} theme(P.find(x => x.id === location.hash.slice(1))); };
