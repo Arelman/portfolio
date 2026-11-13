@@ -142,6 +142,7 @@ a{color:inherit}
 .rev li:nth-child(-n+3) q{font:500 clamp(18px,1.5vw,22px)/1.32 var(--text)}
 
 /* бриф */
+.brief-lead{margin:0;padding-block:clamp(14px,2vw,26px) clamp(22px,3vw,40px);font:500 clamp(20px,2.3vw,34px)/1.2 var(--text);max-width:30em}
 .brief{display:grid;grid-template-columns:1fr 1fr}
 .brief a{display:flex;flex-direction:column;justify-content:space-between;gap:40px;min-height:clamp(260px,34vw,480px);padding-block:clamp(20px,3vw,40px);text-decoration:none}
 .brief a:first-child{background:#F2C84B;color:#0C0C0D}
@@ -229,6 +230,7 @@ figcaption{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:u
   .about .cols{grid-template-columns:1fr}.about .ph{max-width:62%}
   .rev .big{grid-template-columns:1fr}.rev ul{grid-template-columns:1fr}
   .brief{grid-template-columns:1fr}
+  .sect-h.stack{flex-direction:column;align-items:flex-start;gap:12px}
   .meta{grid-template-columns:1fr 1fr}
   .g>*{grid-column:1/-1}.lead0 .mono,.lead0 p,.sec .num,.sec h2{grid-column:1/-1}.lead0 .mono{margin-bottom:10px}
   .sec .num{margin-bottom:10px}
@@ -328,7 +330,8 @@ function home() {
   <ul>${MV.reviews.map(r => `<li><span class="mono">${esc(r[0])}</span><q>${esc(r[1])}</q></li>`).join('')}</ul>
 </section>
 <section id="brief">
-  <div class="sect-h wrap"><h2>Вы заполняете бриф</h2><span class="mono">Как я работаю</span></div>
+  <div class="sect-h stack wrap"><h2>Расскажите о задаче</h2><span class="mono">С чего начинается работа</span></div>
+  <p class="brief-lead wrap">Бриф поможет вам сформулировать задачу, а мне — понять её. Я прочитаю ответы и напишу вам, как двигаться дальше.</p>
   <div class="brief">
     <a class="wrap" href="${me.briefs[0][1]}" target="_blank" rel="noopener"><span class="mono">Бриф 01 · Google Forms</span><span><b>Коммерческий проект</b><span class="go" style="margin-top:18px">Открыть бриф <i><span>→</span></i></span></span></a>
     <a class="wrap" href="${me.briefs[1][1]}" target="_blank" rel="noopener"><span class="mono">Бриф 02 · Google Forms</span><span><b>Гражданская инициатива</b><span class="go" style="margin-top:18px">Открыть бриф <i><span>→</span></i></span></span></a>
@@ -394,7 +397,7 @@ function fit() {
 /* Русская типографика: неразрывные пробелы после коротких предлогов и союзов,
    перед тире и частицами, между числом и словом, короткое последнее слово — вместе с предыдущим. */
 const NB = ' ', LET = 'А-Яа-яЁёA-Za-z0-9';
-const PRE = new RegExp(`(^|[^${LET}\\-])([А-Яа-яЁё]{1,3})\\s+`, 'g');
+const PRE = new RegExp(`(^|[^${LET}\\-])([А-Яа-яЁё]{1,2}|без|для|над|под|при|про|или|что|как|его|её|все|это|так|бы|вот)\\s+`, 'gi');
 function typo(s) {
   if (!/\S\s+\S/.test(s)) return s;
   s = s.replace(/\s+([—–])(?=\s)/g, NB + '$1');
