@@ -7,8 +7,12 @@
 <meta name="description" content="Матвей Воронов — графический дизайнер: айдентика, логотипы, брендбуки, SMM-наборы, бренд-стратегия. Шесть кейсов 2023–2025 и бриф на проект.">
 <meta name="theme-color" content="#EFEFEA">
 <link rel="canonical" href="https://design.openline.one/">
+<link rel="alternate" hreflang="ru" href="https://design.openline.one/">
+<link rel="alternate" hreflang="en" href="https://design.openline.one/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://design.openline.one/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:site_name" content="Матвей Воронов">
 <meta property="og:title" content="Матвей Воронов — графический дизайнер">
 <meta property="og:description" content="Айдентика, логотипы, брендбуки, SMM-наборы и бренд-стратегия. Шесть кейсов и бриф на проект.">
@@ -55,6 +59,11 @@ a{color:inherit}
 .hd nav a:hover{border-color:currentColor}
 .tbtn{background:none;border:2px solid var(--ink);color:var(--ink);font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:8px 11px;cursor:pointer;white-space:nowrap;transition:background-color .2s,color .2s}
 .tbtn:hover,.tbtn[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+/* переключатель языка RU / EN */
+.lsw{display:inline-flex;flex:none;border:2px solid var(--ink)}
+.lsw button{position:relative;background:none;border:0;color:var(--ink);font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:8px 9px;cursor:pointer;transition:background-color .2s,color .2s}
+.lsw button:hover{background:color-mix(in srgb,var(--ink) 14%,transparent)}
+.lsw button[aria-current=true]{background:var(--ink);color:var(--paper);cursor:default}
 .hd .mbtn{display:none;margin-left:auto;background:var(--ink);color:var(--paper);border:0;font:500 13px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;cursor:pointer}
 .ov{position:fixed;inset:0;z-index:30;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;padding-block:calc(18px + env(safe-area-inset-top,0px)) 28px}
 .ov button{align-self:flex-end;background:none;border:2px solid currentColor;color:inherit;font:500 13px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:14px 16px;cursor:pointer}
@@ -158,6 +167,8 @@ a{color:inherit}
 .rev li{border-top:2px solid var(--rule);padding:12px 0 26px;min-width:0}
 .rev li q{display:block;quotes:"«" "»";margin-top:10px;font-size:16px;line-height:1.45}
 .rev li:nth-child(-n+3) q{font:500 clamp(18px,1.5vw,22px)/1.32 var(--text)}
+html[lang=en] .rev li q{quotes:"“" "”"}
+.rev .note{margin:clamp(16px,2.4vw,32px) 0 0;color:var(--mute)}
 
 /* бриф */
 .brief-lead{margin:0;padding-block:clamp(14px,2vw,26px) clamp(22px,3vw,40px);font:500 clamp(20px,2.3vw,34px)/1.2 var(--text);max-width:30em}
@@ -200,6 +211,7 @@ a{color:inherit}
 .bf .err{margin:12px 0 0;font:500 14px/1.4 var(--mono);letter-spacing:.03em;min-height:1.4em}
 .bf .err:not(:empty){display:block;max-width:760px;padding:10px 14px;background:var(--ink);color:var(--paper)}
 .bf .err:not(:empty)::before{content:"Ошибка · ";font-weight:700}
+html[lang=en] .bf .err:not(:empty)::before{content:"Error · "}
 .bf [aria-invalid=true]{border-color:var(--ink);box-shadow:0 5px 0 -1px var(--ink)}
 .bf .acts{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:clamp(14px,2vw,24px)}
 .bf .bfn{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:var(--paper);border:2px solid var(--ink);padding:13px 20px 13px 24px;font:800 clamp(20px,1.9vw,26px)/1 var(--display);text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background-color .2s,color .2s}
@@ -349,7 +361,11 @@ figcaption{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:u
 }
 @media (max-width:860px){
   body{font-size:16px}
-  .hd nav,.hd .rl{display:none}.hd .mbtn{display:block;margin-left:0}.hd .in{gap:10px}.tbtn{margin-left:auto;padding:10px 11px}.tbtn .x{display:none}
+  .hd nav,.hd .rl{display:none}.hd .mbtn{display:block;margin-left:0}.hd .in{gap:8px}.tbtn .x{display:none}
+  .hd .id{white-space:nowrap;font-size:clamp(21px,calc(16.67vw - 39px),26px)}
+  /* на телефоне — одна кнопка: язык, на который можно переключиться */
+  .lsw{margin-left:auto;border:0}.lsw button{border:2px solid var(--ink);padding:10px 9px}.lsw button[aria-current=true]{display:none}
+  .lsw button:hover{background:var(--ink);color:var(--paper)}.tbtn{padding:10px 9px}
   .row2{grid-template-columns:1fr}.row2 .fitline{width:100%}.hero-post{max-width:none;padding:0;margin-top:8px}
   .hero-meta{grid-template-columns:1fr}.cta{justify-self:start}
   .supre{aspect-ratio:1/1.34}
@@ -377,6 +393,9 @@ figcaption{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:u
 .hd nav a,.hd .id,.tbtn,.hd .mbtn,.cta,.ft a,.bf-top a,.chd .top a,.bf .ghost,.ov .sub a{position:relative}
 .hd nav a::after,.hd .id::after,.cta::after{content:"";position:absolute;inset:-9px -6px}
 .tbtn::after,.hd .mbtn::after{content:"";position:absolute;inset:-6px -4px}
+.lsw button::after{content:"";position:absolute;inset:-6px -2px}
+/* на средней ширине шапке с переключателем языка тесно: подпись «Графический дизайнер» уступает место */
+@media (min-width:861px) and (max-width:1000px){.hd .rl{display:none}}
 .bf-top a::after,.chd .top a::after{content:"";position:absolute;inset:-14px -6px}
 .ft a::after,.ov .sub a::after{content:"";position:absolute;inset:-13px -4px}
 .bf .ghost::after{content:"";position:absolute;inset:-5px -4px}
@@ -389,22 +408,33 @@ figcaption{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:u
 </head>
 <body>
 <header class="hd"><div class="in wrap">
-  <a class="id" href="#home">Матвей Воронов</a><span class="mono rl">Графический дизайнер</span>
-  <nav aria-label="Основная"><a href="#works" data-sec>Работы</a><a href="#about" data-sec>О себе</a><a href="#reviews" data-sec>Отзывы</a><a href="#brief" data-sec>Бриф</a></nav>
-  <button class="tbtn" id="tbtn" aria-pressed="false"><span id="tlab">Тёмная</span><span class="x"> тема</span></button>
-  <button class="mbtn" id="mbtn" aria-expanded="false" aria-controls="ov">Меню</button>
+  <a class="id" href="#home" data-t="name">Матвей Воронов</a><span class="mono rl" data-t="role">Графический дизайнер</span>
+  <nav aria-label="Основная" id="nav"><a href="#works" data-sec data-t="nav.works">Работы</a><a href="#about" data-sec data-t="nav.about">О себе</a><a href="#reviews" data-sec data-t="nav.reviews">Отзывы</a><a href="#brief" data-sec data-t="nav.brief">Бриф</a></nav>
+  <div class="lsw" id="lsw" role="group" aria-label="Язык"><button type="button" lang="ru" data-lang="ru" aria-label="Русский" aria-current="true">RU</button><button type="button" lang="en" data-lang="en" aria-label="English">EN</button></div>
+  <button class="tbtn" id="tbtn" aria-pressed="false"><span id="tlab">Тёмная</span><span class="x" data-t="themeWord"> тема</span></button>
+  <button class="mbtn" id="mbtn" aria-expanded="false" aria-controls="ov" data-t="menu">Меню</button>
 </div></header>
 <div class="ov wrap" id="ov" role="dialog" aria-modal="true" aria-label="Меню" hidden>
-  <button id="mclose">Закрыть</button>
-  <a href="#works" data-sec>Работы</a><a href="#about" data-sec>О себе</a><a href="#reviews" data-sec>Отзывы</a><a href="#brief" data-sec>Бриф</a>
+  <button id="mclose" data-t="close">Закрыть</button>
+  <a href="#works" data-sec data-t="nav.works">Работы</a><a href="#about" data-sec data-t="nav.about">О себе</a><a href="#reviews" data-sec data-t="nav.reviews">Отзывы</a><a href="#brief" data-sec data-t="nav.brief">Бриф</a>
   <div class="sub"><a href="https://t.me/Arelman">Telegram @Arelman</a><a href="mailto:korvinart23@gmail.com">korvinart23@gmail.com</a></div>
 </div>
 <main id="app"></main>
 <script src="assets/data.js"></script>
 <script src="assets/briefs.js"></script>
+<script src="assets/data.en.js"></script>
+<script src="assets/briefs.en.js"></script>
+<script src="assets/ui.js"></script>
 <script>
-const P = MV.projects, me = MV.person, BR = MV.briefs;
-const plural = (n, w) => n % 10 === 1 && n % 100 !== 11 ? w[0] : n % 10 > 1 && n % 10 < 5 && (n % 100 < 10 || n % 100 > 20) ? w[1] : w[2];
+/* Два языка: русский (по умолчанию) и английский. Контент (data*.js, briefs*.js) и тексты интерфейса (ui.js) переключаются целиком.
+   Язык: ?lang=ru|en в адресе → сохранённый выбор → русский. */
+const HAS_EN = !!(MV.en && MV.en.projects && MV.en.briefs && MV.ui && MV.ui.en);
+const LANGS = { ru: { data: MV, ui: MV.ui.ru }, en: HAS_EN ? { data: MV.en, ui: MV.ui.en } : null };
+let lang = 'ru'; try { const m = /[?&]lang=(ru|en)(?:&|$)/.exec(location.search); lang = m ? m[1] : localStorage.getItem('mv-lang') === 'en' ? 'en' : 'ru'; } catch (e) {}
+if (!LANGS[lang]) lang = 'ru';
+let P, me, BR, REV, T;
+function useLang(l) { lang = l; const L = LANGS[l]; P = L.data.projects; me = L.data.person; BR = L.data.briefs; REV = L.data.reviews; T = L.ui; }
+useLang(lang);
 const qCount = b => b.steps.reduce((n, s) => n + s.fields.length, 0);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const im = (f, alt) => { const d = MV.dims[f] || [16, 9]; return `<img src="assets/${f}" alt="${esc(alt || '')}" width="${d[0]}" height="${d[1]}" loading="lazy">`; };
@@ -424,11 +454,11 @@ function theme(p) {
   const r = document.documentElement; r.classList.toggle('dark', dark);
   if (dark) { r.style.setProperty('--paper', p ? DK[p.id].bg : '#0C0C0D'); r.style.setProperty('--ink', p ? DK[p.id].fg : '#EFEFEA'); }
   else { r.style.removeProperty('--paper'); r.style.removeProperty('--ink'); }
-  document.getElementById('tlab').textContent = dark ? 'Светлая' : 'Тёмная'; document.getElementById('tbtn').setAttribute('aria-pressed', String(dark));
+  document.getElementById('tlab').textContent = dark ? T.themeLight : T.themeDark; document.getElementById('tbtn').setAttribute('aria-pressed', String(dark));
   const a = document.querySelector('#app article'); if (a && p) a.style.cssText = apal(p);
 }
 const size = n => n.length <= 5 ? 't-xl' : n.length <= 12 ? 't-l' : n.length <= 18 ? 't-m' : 't-s';
-const nm = n => esc(n).replace('Киберправда', 'Кибер<wbr>правда');
+const nm = n => esc(n).replace('Киберправда', 'Кибер<wbr>правда').replace('CyberPravda', 'Cyber<wbr>Pravda');
 const nn = i => String(i + 1).padStart(2, '0');
 const crops = { ri: 'c-circle', salt: 'c-para', fas: 'c-oct', tme: 'c-tilt', sk: 'c-cut', kp: '' };
 const pics = { ri: 'ri-05.jpg', salt: 'salt-card.jpg', fas: 'fas-cover.jpg', tme: 'tme-02.jpg', sk: 'sk-05.jpg', kp: 'kp-01.jpg' };
@@ -436,52 +466,53 @@ const pics = { ri: 'ri-05.jpg', salt: 'salt-card.jpg', fas: 'fas-cover.jpg', tme
 function home() {
   return `
 <section class="hero wrap">
-  <p class="hero-pre">Дизайн — это мой способ</p>
-  <h1 aria-label="Дизайн — это мой способ преобразовывать реальность, делая её доступной, понятной и эстетичной.">
-    <span class="fitline"><span data-fit>преобразовывать</span></span>
-    <span class="row2"><span class="fitline"><span data-fit>реальность,</span></span><span class="hero-post">делая её доступной, понятной и&nbsp;эстетичной.</span></span>
+  <p class="hero-pre">${esc(T.heroPre)}</p>
+  <h1 aria-label="${esc(T.heroAria)}">
+    <span class="fitline"><span data-fit>${esc(T.heroA)}</span></span>
+    <span class="row2"><span class="fitline"><span data-fit>${esc(T.heroB)}</span></span><span class="hero-post">${T.heroPostH}</span></span>
   </h1>
   <div class="hero-meta">
-    <p><b>Матвей Воронов</b>, графический дизайнер. Сначала я выясняю, какую задачу должен решить проект, и только потом берусь за форму.</p>
-    <p class="mono" style="line-height:1.7">Айдентика · Логотипы · Брендбуки · SMM-наборы и мерч · Бренд- и коммуникационная стратегия · Презентации</p>
-    <a class="cta" href="#brief" data-sec>Заполнить бриф <i>↓</i></a>
+    <p>${T.heroIntroH}</p>
+    <p class="mono" style="line-height:1.7">${esc(T.heroTags)}</p>
+    <a class="cta" href="#brief" data-sec>${esc(T.cta)} <i>↓</i></a>
   </div>
 </section>
-<section class="supre" aria-label="Шесть проектов — шесть фигур">
-  ${P.map((p, i) => `<a class="sh s-${p.id}" href="#${p.id}" data-i="${i}" aria-label="${esc(p.name)} — смотреть кейс"><i></i><span class="lb">${nn(i)}<em> ${esc(p.name)}</em></span></a>`).join('')}
-  <div class="cap" id="cap"><span class="mono">Шесть проектов — шесть фигур</span><b>Выберите любую</b><span>Каждая фигура собрана из цветов и знаков проекта и ведёт в его кейс.</span></div>
+<section class="supre" aria-label="${esc(T.supreAria)}">
+  ${P.map((p, i) => `<a class="sh s-${p.id}" href="#${p.id}" data-i="${i}" aria-label="${esc(T.shapeAria(p.name))}"><i></i><span class="lb">${nn(i)}<em> ${esc(p.name)}</em></span></a>`).join('')}
+  <div class="cap" id="cap"><span class="mono">${esc(T.capMono)}</span><b>${esc(T.capB)}</b><span>${esc(T.capText)}</span></div>
 </section>
 <section id="works">
-  <div class="sect-h wrap"><h2>Работы</h2><span class="mono">06 проектов · 2023—2025</span></div>
+  <div class="sect-h wrap"><h2>${esc(T.worksH)}</h2><span class="mono">${esc(T.worksMono)}</span></div>
   ${P.map((p, i) => `
   <a class="poster ${size(p.name)} ${i % 2 ? 'flip' : ''}" href="#${p.id}" style="${pal(p)}"><div class="wrap">
     <div class="top mono"><span>${nn(i)} / 06</span><span>${esc(p.kind)}</span><span>${esc(p.category)} · ${p.year}</span></div>
     <h3>${nm(p.name)}</h3>
     <div class="row">
-      <div class="txt"><p>${esc(p.title)}</p><ul class="tags">${p.scope.map(s => `<li>${esc(s)}</li>`).join('')}</ul><span class="go">Смотреть кейс <i>→</i></span></div>
+      <div class="txt"><p>${esc(p.title)}</p><ul class="tags">${p.scope.map(s => `<li>${esc(s)}</li>`).join('')}</ul><span class="go">${esc(T.go)} <i>→</i></span></div>
       <div class="pic ${crops[p.id]}">${im(pics[p.id], p.name)}</div>
     </div>
   </div></a>`).join('')}
 </section>
 <section class="about" id="about"><div class="wrap">
-  <h2 class="ab-h">Обо мне</h2>
-  <h2 class="x" aria-label="Европейский минимализм и русский авангард"><span class="thin"><svg viewBox="0 -813 4634 813" aria-hidden="true" focusable="false"><path d="M309,0h-254c-6,0 -9,-3.33333 -9,-10v-635c0,-6.66667 2.66667,-10 8,-10h255c5.33333,0 8,3.33333 8,10v65c0,7.33333 -2.66667,11 -8,11h-170v195h155c5.33333,0 8,3.66667 8,11v61c0,6.66667 -2.66667,10 -8,10h-155v206h170c5.33333,0 8,3.66667 8,11v65c0,6.66667 -2.66667,10 -8,10zM559,0h-129c-6.66667,0 -10,-3.33333 -10,-10v-635c0,-6.66667 3.33333,-10 10,-10h118c58,0 100.83333,13.33333 128.5,40c27.66667,26.66667 41.5,67.33333 41.5,122c0,34.66667 -6.16667,64.16667 -18.5,88.5c-12.33333,24.33333 -31.16667,43.5 -56.5,57.5v2c30.66667,10 54,28.33333 70,55c16,26.66667 24,61.33333 24,104c0,61.33333 -14.66667,107.66667 -44,139c-29.33333,31.33333 -74,47 -134,47zM513,-299v217h45c29.33333,0 51.16667,-9.16667 65.5,-27.5c14.33333,-18.33333 21.5,-46.16667 21.5,-83.5c0,-36 -7,-62.66667 -21,-80c-14,-17.33333 -35.33333,-26 -64,-26zM513,-573v197h40c24,0 42.33333,-8.66667 55,-26c12.66667,-17.33333 19,-43 19,-77c0,-33.33333 -6.16667,-57.33333 -18.5,-72c-12.33333,-14.66667 -31.83333,-22 -58.5,-22zM913,0h-76c-5.33333,0 -8,-3.33333 -8,-10v-635c0,-6.66667 2.66667,-10 8,-10h115c60.66667,0 105.33333,16.83333 134,50.5c28.66667,33.66667 43,86.16667 43,157.5c0,66.66667 -14.66667,117.66667 -44,153c-29.33333,35.33333 -72,53 -128,53h-35v231c0,6.66667 -3,10 -9,10zM922,-570v244h30c29.33333,0 50.66667,-9.66667 64,-29c13.33333,-19.33333 20,-49.66667 20,-91c0,-44 -6.5,-75.66667 -19.5,-95c-13,-19.33333 -33.5,-29 -61.5,-29zM1383,6c-56,0 -99,-16.66667 -129,-50c-30,-33.33333 -45,-83.33333 -45,-150v-265c0,-68 15,-118.66667 45,-152c30,-33.33333 73,-50 129,-50c56.66667,0 100,16.66667 130,50c30,33.33333 45,84 45,152v265c0,66.66667 -15,116.66667 -45,150c-30,33.33333 -73.33333,50 -130,50zM1383,-80c27.33333,0 47.83333,-9.33333 61.5,-28c13.66667,-18.66667 20.5,-49 20.5,-91v-256c0,-42.66667 -6.83333,-73.33333 -20.5,-92c-13.66667,-18.66667 -34.16667,-28 -61.5,-28c-26.66667,0 -46.83333,9.33333 -60.5,28c-13.66667,18.66667 -20.5,49.33333 -20.5,92v256c0,42 6.83333,72.33333 20.5,91c13.66667,18.66667 33.83333,28 60.5,28zM1746,0h-77c-5.33333,0 -8,-3.66667 -8,-11v-634c0,-6.66667 3,-10 9,-10h323c6,0 9,3.33333 9,10v634c0,7.33333 -3,11 -9,11h-75c-6,0 -9,-3.33333 -9,-10v-559h-155v558c0,7.33333 -2.66667,11 -8,11zM2376,0h-254c-6,0 -9,-3.33333 -9,-10v-635c0,-6.66667 2.66667,-10 8,-10h255c5.33333,0 8,3.33333 8,10v65c0,7.33333 -2.66667,11 -8,11h-170v195h155c5.33333,0 8,3.66667 8,11v61c0,6.66667 -2.66667,10 -8,10h-155v206h170c5.33333,0 8,3.66667 8,11v65c0,6.66667 -2.66667,10 -8,10zM2582,0h-86c-6,0 -9,-3.33333 -9,-10v-635c0,-6.66667 3,-10 9,-10h73c5.33333,0 8,3.33333 8,10v277c0,13.33333 -0.33333,30.5 -1,51.5c-0.66667,21 -1.66667,43 -3,66c-1.33333,23 -2.5,45 -3.5,66c-1,21 -2.16667,38.5 -3.5,52.5h2c5.33333,-18 11.16667,-39.16667 17.5,-63.5c6.33333,-24.33333 13.66667,-51.16667 22,-80.5c8.33333,-29.33333 17.5,-60 27.5,-92l87,-280c1.33333,-4.66667 4.33333,-7 9,-7h88c6,0 9,3.33333 9,10v635c0,6.66667 -3,10 -9,10h-72c-6,0 -9,-3.33333 -9,-10l2,-261c0,-16 0.33333,-34.83333 1,-56.5c0.66667,-21.66667 1.66667,-44.5 3,-68.5c1.33333,-24 2.5,-46.83333 3.5,-68.5c1,-21.66667 2.16667,-40.5 3.5,-56.5h-2c-5.33333,20 -11.5,43 -18.5,69c-7,26 -15,54 -24,84c-9,30 -18.83333,62.33333 -29.5,97l-84,264c-1.33333,4.66667 -5,7 -11,7zM2658,-710c-21.33333,0 -39,-3.33333 -53,-10c-14,-6.66667 -25.66667,-13.33333 -35,-20c-2.66667,-2.66667 -4,-6.33333 -4,-11v-49c0,-7.33333 3.33333,-9 10,-5c10.66667,7.33333 22.5,13.5 35.5,18.5c13,5 28.5,7.5 46.5,7.5c18,0 33.33333,-2.5 46,-7.5c12.66667,-5 24.33333,-11.16667 35,-18.5c2.66667,-2 5,-2.5 7,-1.5c2,1 3,3.16667 3,6.5v49c0,5.33333 -1.33333,9 -4,11c-9.33333,7.33333 -21,14.16667 -35,20.5c-14,6.33333 -31.33333,9.5 -52,9.5zM3105,6c-56.66667,0 -99.83333,-17.16667 -129.5,-51.5c-29.66667,-34.33333 -44.5,-87.16667 -44.5,-158.5v-247c0,-70 14.83333,-122.5 44.5,-157.5c29.66667,-35 72.83333,-52.5 129.5,-52.5c40.66667,0 74.33333,9.16667 101,27.5c26.66667,18.33333 45.83333,44.16667 57.5,77.5c11.66667,33.33333 14.83333,73 9.5,119c-1.33333,6.66667 -4,10 -8,10h-77c-6.66667,0 -9.33333,-4 -8,-12c3.33333,-44 -1,-77.66667 -13,-101c-12,-23.33333 -32.66667,-35 -62,-35c-27.33333,0 -47.66667,10 -61,30c-13.33333,20 -20,53 -20,99v236c0,46 6.83333,79.16667 20.5,99.5c13.66667,20.33333 33.83333,30.5 60.5,30.5c32,0 53.5,-12.33333 64.5,-37c11,-24.66667 15.16667,-58 12.5,-100c-1.33333,-7.33333 1.33333,-11 8,-11h73c6,0 9.66667,3.66667 11,11c4.66667,70 -7.16667,124.66667 -35.5,164c-28.33333,39.33333 -72.83333,59 -133.5,59zM3461,0h-75c-6,0 -9,-3.33333 -9,-10v-635c0,-6.66667 3,-10 9,-10h75c6,0 9,3.33333 9,10v272h37l109,-276c1.33333,-2.66667 2.83333,-4.33333 4.5,-5c1.66667,-0.66667 3.5,-1 5.5,-1h78c3.33333,0 5.33333,1.16667 6,3.5c0.66667,2.33333 0.33333,5.5 -1,9.5l-121,300l138,329c2.66667,8.66667 0.33333,13 -7,13h-84c-2,0 -3.66667,-0.33333 -5,-1c-1.33333,-0.66667 -2.66667,-2.33333 -4,-5l-118,-283h-38v279c0,6.66667 -3,10 -9,10zM3889,0h-86c-6,0 -9,-3.33333 -9,-10v-635c0,-6.66667 3,-10 9,-10h73c5.33333,0 8,3.33333 8,10v277c0,13.33333 -0.33333,30.5 -1,51.5c-0.66667,21 -1.66667,43 -3,66c-1.33333,23 -2.5,45 -3.5,66c-1,21 -2.16667,38.5 -3.5,52.5h2c5.33333,-18 11.16667,-39.16667 17.5,-63.5c6.33333,-24.33333 13.66667,-51.16667 22,-80.5c8.33333,-29.33333 17.5,-60 27.5,-92l87,-280c1.33333,-4.66667 4.33333,-7 9,-7h88c6,0 9,3.33333 9,10v635c0,6.66667 -3,10 -9,10h-72c-6,0 -9,-3.33333 -9,-10l2,-261c0,-16 0.33333,-34.83333 1,-56.5c0.66667,-21.66667 1.66667,-44.5 3,-68.5c1.33333,-24 2.5,-46.83333 3.5,-68.5c1,-21.66667 2.16667,-40.5 3.5,-56.5h-2c-5.33333,20 -11.5,43 -18.5,69c-7,26 -15,54 -24,84c-9,30 -18.83333,62.33333 -29.5,97l-84,264c-1.33333,4.66667 -5,7 -11,7zM4342,0h-86c-6,0 -9,-3.33333 -9,-10v-635c0,-6.66667 3,-10 9,-10h73c5.33333,0 8,3.33333 8,10v277c0,13.33333 -0.33333,30.5 -1,51.5c-0.66667,21 -1.66667,43 -3,66c-1.33333,23 -2.5,45 -3.5,66c-1,21 -2.16667,38.5 -3.5,52.5h2c5.33333,-18 11.16667,-39.16667 17.5,-63.5c6.33333,-24.33333 13.66667,-51.16667 22,-80.5c8.33333,-29.33333 17.5,-60 27.5,-92l87,-280c1.33333,-4.66667 4.33333,-7 9,-7h88c6,0 9,3.33333 9,10v635c0,6.66667 -3,10 -9,10h-72c-6,0 -9,-3.33333 -9,-10l2,-261c0,-16 0.33333,-34.83333 1,-56.5c0.66667,-21.66667 1.66667,-44.5 3,-68.5c1.33333,-24 2.5,-46.83333 3.5,-68.5c1,-21.66667 2.16667,-40.5 3.5,-56.5h-2c-5.33333,20 -11.5,43 -18.5,69c-7,26 -15,54 -24,84c-9,30 -18.83333,62.33333 -29.5,97l-84,264c-1.33333,4.66667 -5,7 -11,7zM4418,-710c-21.33333,0 -39,-3.33333 -53,-10c-14,-6.66667 -25.66667,-13.33333 -35,-20c-2.66667,-2.66667 -4,-6.33333 -4,-11v-49c0,-7.33333 3.33333,-9 10,-5c10.66667,7.33333 22.5,13.5 35.5,18.5c13,5 28.5,7.5 46.5,7.5c18,0 33.33333,-2.5 46,-7.5c12.66667,-5 24.33333,-11.16667 35,-18.5c2.66667,-2 5,-2.5 7,-1.5c2,1 3,3.16667 3,6.5v49c0,5.33333 -1.33333,9 -4,11c-9.33333,7.33333 -21,14.16667 -35,20.5c-14,6.33333 -31.33333,9.5 -52,9.5z"/></svg><svg viewBox="0 -813 4605 813" aria-hidden="true" focusable="false"><path d="M121,0h-75c-5.33333,0 -8,-3.33333 -8,-10l9,-635c0,-6.66667 3,-10 9,-10h100c6,0 9.33333,2.66667 10,8l92,363l93,-363c1.33333,-5.33333 5,-8 11,-8h100c5.33333,0 8,3.33333 8,10l9,635c0,6.66667 -3,10 -9,10h-74c-6,0 -9,-3.33333 -9,-10l-3,-353c-0.66667,-26 -0.66667,-51.66667 0,-77c0.66667,-25.33333 1.66667,-49.33333 3,-72h-1c-4.66667,20.66667 -9.83333,41.66667 -15.5,63c-5.66667,21.33333 -11.5,42 -17.5,62l-83,293c-1.33333,5.33333 -4.66667,8 -10,8h-4c-4.66667,0 -7.33333,-2.66667 -8,-8l-85,-294c-6,-20 -11.66667,-40.5 -17,-61.5c-5.33333,-21 -10.33333,-41.83333 -15,-62.5h-2c2,22.66667 3.33333,46.5 4,71.5c0.66667,25 1,50.83333 1,77.5l-4,353c0,6.66667 -3,10 -9,10zM678,0h-86c-6,0 -9,-3.33333 -9,-10v-635c0,-6.66667 3,-10 9,-10h73c5.33333,0 8,3.33333 8,10v277c0,13.33333 -0.33333,30.5 -1,51.5c-0.66667,21 -1.66667,43 -3,66c-1.33333,23 -2.5,45 -3.5,66c-1,21 -2.16667,38.5 -3.5,52.5h2c5.33333,-18 11.16667,-39.16667 17.5,-63.5c6.33333,-24.33333 13.66667,-51.16667 22,-80.5c8.33333,-29.33333 17.5,-60 27.5,-92l87,-280c1.33333,-4.66667 4.33333,-7 9,-7h88c6,0 9,3.33333 9,10v635c0,6.66667 -3,10 -9,10h-72c-6,0 -9,-3.33333 -9,-10l2,-261c0,-16 0.33333,-34.83333 1,-56.5c0.66667,-21.66667 1.66667,-44.5 3,-68.5c1.33333,-24 2.5,-46.83333 3.5,-68.5c1,-21.66667 2.16667,-40.5 3.5,-56.5h-2c-5.33333,20 -11.5,43 -18.5,69c-7,26 -15,54 -24,84c-9,30 -18.83333,62.33333 -29.5,97l-84,264c-1.33333,4.66667 -5,7 -11,7zM1120,0h-75c-6,0 -9,-3.33333 -9,-10v-635c0,-6.66667 3,-10 9,-10h75c6,0 9,3.33333 9,10v266h157v-266c0,-6.66667 3,-10 9,-10h74c6.66667,0 10,3.33333 10,10v635c0,6.66667 -3.33333,10 -10,10h-74c-6,0 -9,-3.33333 -9,-10v-284h-157v284c0,6.66667 -3,10 -9,10zM1585,0h-86c-6,0 -9,-3.33333 -9,-10v-635c0,-6.66667 3,-10 9,-10h73c5.33333,0 8,3.33333 8,10v277c0,13.33333 -0.33333,30.5 -1,51.5c-0.66667,21 -1.66667,43 -3,66c-1.33333,23 -2.5,45 -3.5,66c-1,21 -2.16667,38.5 -3.5,52.5h2c5.33333,-18 11.16667,-39.16667 17.5,-63.5c6.33333,-24.33333 13.66667,-51.16667 22,-80.5c8.33333,-29.33333 17.5,-60 27.5,-92l87,-280c1.33333,-4.66667 4.33333,-7 9,-7h88c6,0 9,3.33333 9,10v635c0,6.66667 -3,10 -9,10h-72c-6,0 -9,-3.33333 -9,-10l2,-261c0,-16 0.33333,-34.83333 1,-56.5c0.66667,-21.66667 1.66667,-44.5 3,-68.5c1.33333,-24 2.5,-46.83333 3.5,-68.5c1,-21.66667 2.16667,-40.5 3.5,-56.5h-2c-5.33333,20 -11.5,43 -18.5,69c-7,26 -15,54 -24,84c-9,30 -18.83333,62.33333 -29.5,97l-84,264c-1.33333,4.66667 -5,7 -11,7zM2018,0h-75c-5.33333,0 -8,-3.33333 -8,-10l9,-635c0,-6.66667 3,-10 9,-10h100c6,0 9.33333,2.66667 10,8l92,363l93,-363c1.33333,-5.33333 5,-8 11,-8h100c5.33333,0 8,3.33333 8,10l9,635c0,6.66667 -3,10 -9,10h-74c-6,0 -9,-3.33333 -9,-10l-3,-353c-0.66667,-26 -0.66667,-51.66667 0,-77c0.66667,-25.33333 1.66667,-49.33333 3,-72h-1c-4.66667,20.66667 -9.83333,41.66667 -15.5,63c-5.66667,21.33333 -11.5,42 -17.5,62l-83,293c-1.33333,5.33333 -4.66667,8 -10,8h-4c-4.66667,0 -7.33333,-2.66667 -8,-8l-85,-294c-6,-20 -11.66667,-40.5 -17,-61.5c-5.33333,-21 -10.33333,-41.83333 -15,-62.5h-2c2,22.66667 3.33333,46.5 4,71.5c0.66667,25 1,50.83333 1,77.5l-4,353c0,6.66667 -3,10 -9,10zM2522,0h-82c-5.33333,0 -7.66667,-3.66667 -7,-11l133,-636c0.66667,-5.33333 4,-8 10,-8h100c6,0 9.33333,2.66667 10,8l133,635c1.33333,8 -1,12 -7,12h-83c-4.66667,0 -7.66667,-2.33333 -9,-7l-24.41162,-142l-139.88765,0l-24.70073,141c-0.66667,5.33333 -3.66667,8 -9,8zM2681.66344,-230l-32.66344,-190c-4.66667,-22.66667 -8.83333,-45.5 -12.5,-68.5c-3.66667,-23 -7.16667,-46.16667 -10.5,-69.5h-2c-2.66667,23.33333 -5.66667,46.5 -9,69.5c-3.33333,23 -7.33333,46.16667 -12,69.5l-33.10949,189zM2926,0h-82c-5.33333,0 -7.66667,-3.66667 -7,-11l130,-636c0.66667,-5.33333 4,-8 10,-8h100c6,0 9.33333,2.66667 10,8l130,635c1.33333,8 -1,12 -7,12h-82c-4.66667,0 -7.66667,-2.33333 -9,-7l-70,-411c-4.66667,-23.33333 -8.66667,-46.66667 -12,-70c-3.33333,-23.33333 -6.66667,-46.66667 -10,-70h-2c-2.66667,23.33333 -5.66667,46.66667 -9,70c-3.33333,23.33333 -7,46.33333 -11,69l-70,411c-0.66667,5.33333 -3.66667,8 -9,8zM3377,0h-86c-6,0 -9,-3.33333 -9,-10v-635c0,-6.66667 3,-10 9,-10h73c5.33333,0 8,3.33333 8,10v277c0,13.33333 -0.33333,30.5 -1,51.5c-0.66667,21 -1.66667,43 -3,66c-1.33333,23 -2.5,45 -3.5,66c-1,21 -2.16667,38.5 -3.5,52.5h2c5.33333,-18 11.16667,-39.16667 17.5,-63.5c6.33333,-24.33333 13.66667,-51.16667 22,-80.5c8.33333,-29.33333 17.5,-60 27.5,-92l87,-280c1.33333,-4.66667 4.33333,-7 9,-7h88c6,0 9,3.33333 9,10v635c0,6.66667 -3,10 -9,10h-72c-6,0 -9,-3.33333 -9,-10l2,-261c0,-16 0.33333,-34.83333 1,-56.5c0.66667,-21.66667 1.66667,-44.5 3,-68.5c1.33333,-24 2.5,-46.83333 3.5,-68.5c1,-21.66667 2.16667,-40.5 3.5,-56.5h-2c-5.33333,20 -11.5,43 -18.5,69c-7,26 -15,54 -24,84c-9,30 -18.83333,62.33333 -29.5,97l-84,264c-1.33333,4.66667 -5,7 -11,7zM3869,6c-37.33333,0 -68,-7 -92,-21c-24,-14 -41,-34.16667 -51,-60.5c-10,-26.33333 -13.66667,-58.16667 -11,-95.5c0.66667,-4.66667 1.83333,-7.5 3.5,-8.5c1.66667,-1 4.16667,-1.5 7.5,-1.5h70c4.66667,0 7,3 7,9c-2,32 2.66667,56 14,72c11.33333,16 29.33333,24 54,24c28,0 48,-8.66667 60,-26c12,-17.33333 18,-45.66667 18,-85c0,-36.66667 -6.83333,-63.16667 -20.5,-79.5c-13.66667,-16.33333 -35.83333,-24.5 -66.5,-24.5h-44c-5.33333,0 -8,-3.33333 -8,-10v-60c0,-6.66667 2.66667,-10 8,-10h34c28.66667,0 49.5,-9.5 62.5,-28.5c13,-19 19.5,-47.16667 19.5,-84.5c0,-33.33333 -5.16667,-57.5 -15.5,-72.5c-10.33333,-15 -27.83333,-22.5 -52.5,-22.5c-24,0 -40.83333,7.66667 -50.5,23c-9.66667,15.33333 -13.16667,38.66667 -10.5,70c0,7.33333 -2.66667,11 -8,11h-71c-2.66667,0 -4.66667,-0.66667 -6,-2c-1.33333,-1.33333 -2.33333,-4 -3,-8c-4,-56.66667 7,-100.16667 33,-130.5c26,-30.33333 66.66667,-45.5 122,-45.5c50.66667,0 88.83333,13.66667 114.5,41c25.66667,27.33333 38.5,68.33333 38.5,123c0,37.33333 -6.16667,69.83333 -18.5,97.5c-12.33333,27.66667 -29.83333,47.83333 -52.5,60.5v1c28,10 49.5,27.66667 64.5,53c15,25.33333 22.5,58 22.5,98c0,65.33333 -14.5,113.83333 -43.5,145.5c-29,31.66667 -71.83333,47.5 -128.5,47.5zM4209,0h-75c-5.33333,0 -8,-3.33333 -8,-10l9,-635c0,-6.66667 3,-10 9,-10h100c6,0 9.33333,2.66667 10,8l92,363l93,-363c1.33333,-5.33333 5,-8 11,-8h100c5.33333,0 8,3.33333 8,10l9,635c0,6.66667 -3,10 -9,10h-74c-6,0 -9,-3.33333 -9,-10l-3,-353c-0.66667,-26 -0.66667,-51.66667 0,-77c0.66667,-25.33333 1.66667,-49.33333 3,-72h-1c-4.66667,20.66667 -9.83333,41.66667 -15.5,63c-5.66667,21.33333 -11.5,42 -17.5,62l-83,293c-1.33333,5.33333 -4.66667,8 -10,8h-4c-4.66667,0 -7.33333,-2.66667 -8,-8l-85,-294c-6,-20 -11.66667,-40.5 -17,-61.5c-5.33333,-21 -10.33333,-41.83333 -15,-62.5h-2c2,22.66667 3.33333,46.5 4,71.5c0.66667,25 1,50.83333 1,77.5l-4,353c0,6.66667 -3,10 -9,10z"/></svg></span><span>× русский авангард</span></h2>
+  <h2 class="ab-h">${esc(T.aboutH)}</h2>
+  <h2 class="x" aria-label="${esc(T.aboutXAria)}">${T.aboutXH}</h2>
   <div class="cols">
-    <div class="ph">${im(me.photo, 'Матвей Воронов')}</div>
+    <div class="ph">${im(me.photo, me.name)}</div>
     <div><p>${esc(me.about[1])}</p><p>${esc(me.about[0])}</p></div>
     <ul class="edu">${me.education.map(e => `<li><span class="mono">${e[0]}</span><b>${esc(e[1])}</b><span>${esc(e[2])}</span></li>`).join('')}</ul>
   </div>
 </div></section>
 <section class="rev wrap" id="reviews">
-  <div class="sect-h" style="margin-bottom:clamp(20px,3vw,40px)"><h2>Отзывы</h2><span class="mono">Оценки заказчиков</span></div>
-  <div class="big"><p>Девять отзывов, и в каждом пять звёзд: за точность в выполнении ТЗ и за приятную работу.</p></div>
-  <ul>${MV.reviews.map(r => `<li><span class="mono">${esc(r[0])}</span><q>${esc(r[1])}</q></li>`).join('')}</ul>
+  <div class="sect-h" style="margin-bottom:clamp(20px,3vw,40px)"><h2>${esc(T.reviewsH)}</h2><span class="mono">${esc(T.reviewsMono)}</span></div>
+  <div class="big"><p>${esc(T.reviewsLead)}</p></div>
+  <ul>${REV.map(r => `<li><span class="mono">${esc(r[0])}</span><q>${esc(r[1])}</q></li>`).join('')}</ul>${T.revNote ? `
+  <p class="mono note">${esc(T.revNote)}</p>` : ''}
 </section>
 <section id="brief">
-  <div class="sect-h stack wrap"><h2>Расскажите о задаче</h2><span class="mono">С чего начинается работа</span></div>
-  <p class="brief-lead wrap">Бриф поможет вам сформулировать задачу, а мне — понять её. Я прочитаю ответы и напишу вам, как двигаться дальше.</p>
+  <div class="sect-h stack wrap"><h2>${esc(T.briefH)}</h2><span class="mono">${esc(T.briefMono)}</span></div>
+  <p class="brief-lead wrap">${esc(T.briefLead)}</p>
   <div class="brief">
-    ${BR.map(b => `<a class="wrap" href="#brief-${b.id}"><span class="mono">Бриф ${b.n} · ${qCount(b)} ${plural(qCount(b), ['вопрос', 'вопроса', 'вопросов'])}</span><span><b>${esc(b.name)}</b><span class="go" style="margin-top:18px">Открыть бриф <i><span>→</span></i></span></span></a>`).join('')}
+    ${BR.map(b => `<a class="wrap" href="#brief-${b.id}"><span class="mono">${esc(T.briefTag(b.n, `${qCount(b)} ${T.plural(qCount(b), T.qWords)}`))}</span><span><b>${esc(b.name)}</b><span class="go" style="margin-top:18px">${esc(T.open)} <i><span>→</span></i></span></span></a>`).join('')}
   </div>
 </section>`;
 }
@@ -498,7 +529,7 @@ function blocks(p) {
     if (t === 'imgs') { const n = a.length === 3 ? 3 : 2, rows = []; for (let k = 0; k < a.length; k += n) rows.push(`<div class="grow">${a.slice(k, k + n).map(f => { const d = MV.dims[f] || [16, 9]; return `<div style="flex:${(d[0] / d[1]).toFixed(3)}">${im(f, c)}</div>`; }).join('')}</div>`); return `<figure class="full"><div class="grid">${rows.join('')}</div><figcaption>${esc(c)}</figcaption></figure>`; }
     if (t === 'figs') return `<div class="figs full n${a.length}">${a.map(f => `<figure>${im(f[0], f[1])}<b>${esc(f[1])}</b><p>${esc(f[2])}</p></figure>`).join('')}</div>`;
     if (t === 'metrics') return `<div class="mt">${a.map(m => `<div><strong>${esc(m[0])}</strong><b>${esc(m[1])}</b><p>${esc(m[2])}</p></div>`).join('')}</div>`;
-    if (t === 'ba') return `<div class="ba full">${a.map(x => `<div><div class="pair"><div><span>ДО</span>${im(x[0], 'До')}</div><span class="ar">→</span><div><span>ПОСЛЕ</span>${im(x[1], 'После')}</div></div><p>${esc(x[2])}</p></div>`).join('')}</div>`;
+    if (t === 'ba') return `<div class="ba full">${a.map(x => `<div><div class="pair"><div><span>${esc(T.before)}</span>${im(x[0], T.beforeAlt)}</div><span class="ar">→</span><div><span>${esc(T.after)}</span>${im(x[1], T.afterAlt)}</div></div><p>${esc(x[2])}</p></div>`).join('')}</div>`;
     return '';
   }).join('');
 }
@@ -508,30 +539,30 @@ function kase(p) {
   return `
 <article style="${apal(p)}">
   <header class="chd ${size(p.name)}"><div class="wrap">
-    <div class="top mono"><a href="#works" data-sec>← Все работы</a><span>${nn(i)} / 06</span></div>
+    <div class="top mono"><a href="#works" data-sec>${esc(T.back)}</a><span>${nn(i)} / 06</span></div>
     <h1>${nm(p.name)}</h1>
     <p class="sub">${esc(p.title)}</p>
     <dl class="meta">
-      <div><dt>Объём работ</dt><dd>${p.scope.map(esc).join('<br>')}</dd></div>
-      <div><dt>Заказчик</dt><dd>${esc(p.kind)}</dd></div>
-      <div><dt>Формат</dt><dd>${esc(p.category)}</dd></div>
-      <div><dt>Роль · год</dt><dd>${esc(p.role)}<br>${p.year}</dd></div>
+      <div><dt>${esc(T.scope)}</dt><dd>${p.scope.map(esc).join('<br>')}</dd></div>
+      <div><dt>${esc(T.client)}</dt><dd>${esc(p.kind)}</dd></div>
+      <div><dt>${esc(T.format)}</dt><dd>${esc(p.category)}</dd></div>
+      <div><dt>${esc(T.roleYear)}</dt><dd>${esc(p.role)}<br>${p.year}</dd></div>
     </dl>
   </div></header>
   <div class="cover">${im(p.cover, p.name)}</div>
   <div class="body wrap"><div class="g">
-    <div class="lead0"><span class="mono">О проекте</span><p>${esc(p.lead)}</p></div>
+    <div class="lead0"><span class="mono">${esc(T.aboutProject)}</span><p>${esc(p.lead)}</p></div>
     ${blocks(p)}
   </div></div>
   <a class="next ${size(nx.name)}" href="#${nx.id}" style="${pal(nx)}"><div class="wrap">
-    <div class="top mono"><span>Следующий проект</span><span>${nn(P.indexOf(nx))} / 06</span></div>
-    <h3>${nm(nx.name)}</h3><span class="go">Смотреть кейс <i>→</i></span>
+    <div class="top mono"><span>${esc(T.nextProject)}</span><span>${nn(P.indexOf(nx))} / 06</span></div>
+    <h3>${nm(nx.name)}</h3><span class="go">${esc(T.go)} <i>→</i></span>
   </div></a>
 </article>`;
 }
 
 function footer() {
-  return `<footer class="ft"><div class="in wrap"><b>${me.name}</b><span class="r">Если вам подходит такой взгляд на дизайн, давайте обсудим ваш проект.</span><a href="${me.telegram[1]}" target="_blank" rel="noopener">Telegram ${me.telegram[0]}</a><a href="mailto:${me.email}">${me.email}</a></div></footer>`;
+  return `<footer class="ft"><div class="in wrap"><b>${me.name}</b><span class="r">${esc(T.footer)}</span><a href="${me.telegram[1]}" target="_blank" rel="noopener">Telegram ${me.telegram[0]}</a><a href="mailto:${me.email}">${me.email}</a></div></footer>`;
 }
 
 function fit() {
@@ -545,7 +576,7 @@ function fit() {
    перед тире и частицами, между числом и словом, короткое последнее слово — вместе с предыдущим. */
 const NB = ' ', LET = 'А-Яа-яЁёA-Za-z0-9';
 const PRE = new RegExp(`(^|[^${LET}\\-])([А-Яа-яЁё]{1,2}|без|для|над|под|при|про|или|что|как|его|её|все|это|так|бы|вот)\\s+`, 'gi');
-function typo(s) {
+function typoRu(s) {
   if (!/\S\s+\S/.test(s)) return s;
   s = s.replace(/\s+([—–])(?=\s)/g, NB + '$1');
   for (let k = 0; k < 2; k++) s = s.replace(PRE, (m, a, w) => a + w + NB);
@@ -553,6 +584,17 @@ function typo(s) {
   s = s.replace(/(\d)\s+(?=[А-Яа-яЁёA-Za-z])/g, '$1' + NB);
   return s.replace(new RegExp(`([^\\s${NB}])[ \\t\\n]+([${LET}]{1,5}[.,;:!?»)]*)([ \\t\\n]*)$`), '$1' + NB + '$2$3');
 }
+/* Английская типографика: неразрывные пробелы после слов из одной-двух букв, перед тире, между числом и словом;
+   короткое последнее слово — вместе с предыдущим. */
+const PRE_EN = /(^|[^A-Za-z0-9'’\-])(a|an|i|to|of|in|on|at|by|or|as|is|it|we|no|so|up|if|do|my|me|us|be|he|am)\s+/gi;
+function typoEn(s) {
+  if (!/\S\s+\S/.test(s)) return s;
+  s = s.replace(/\s+([—–])(?=\s)/g, NB + '$1');
+  for (let k = 0; k < 2; k++) s = s.replace(PRE_EN, (m, a, w) => a + w + NB);
+  s = s.replace(/(\d)\s+(?=[A-Za-z])/g, '$1' + NB);
+  return s.replace(new RegExp(`([^\\s${NB}])[ \\t\\n]+([A-Za-z0-9]{1,5}[.,;:!?”’)]*)([ \\t\\n]*)$`), '$1' + NB + '$2$3');
+}
+const typo = s => lang === 'en' ? typoEn(s) : typoRu(s);
 function typoTree(root) {
   const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => /^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
   const list = []; while (w.nextNode()) list.push(w.currentNode);
@@ -567,15 +609,27 @@ function bfStore(b, v) {
 }
 function briefShell(b) {
   return `<section class="bf ${b.color}" id="bf" aria-label="${esc(b.title)}"><div class="bf-bar"><i id="bf-p"></i></div>
-  <div class="bf-top wrap mono"><a href="#brief">← К сайту</a><span id="bf-n"></span></div>
+  <div class="bf-top wrap mono"><a href="#brief">${esc(T.backSite)}</a><span id="bf-n"></span></div>
   <div class="bf-body wrap" id="bf-body"></div></section>`;
 }
-function bfStart(b) {
+function bfStart(b, prev) {
   const screens = [{ k: 'intro' }];
   b.steps.forEach(s => { if (s.intro) screens.push({ k: 'sec', s }); s.fields.forEach(f => screens.push({ k: 'q', f, s })); });
   const st = bfStore(b);
   BF = { b, screens, i: 0, a: st.a || {}, saved: Math.min(st.i || 0, screens.length - 1), err: '', busy: false, sent: false };
+  /* смена языка посреди брифа: остаёмся на том же вопросе, ответы сохраняются */
+  if (prev && prev.b.id === b.id) Object.assign(BF, { i: prev.i, a: prev.a, saved: prev.saved, busy: prev.busy, sent: prev.sent });
+  bfNorm();
   bfRender(true);
+}
+/* выбранные варианты хранятся подписями: подписи переводятся на язык интерфейса по номеру варианта,
+   поэтому черновик, начатый на другом языке, не теряется */
+function bfNorm() {
+  const o = LANGS[lang === 'en' ? 'ru' : 'en']?.data.briefs.find(x => x.id === BF.b.id); if (!o) return;
+  BF.b.steps.forEach((s, si) => s.fields.forEach((f, fi) => {
+    const of = o.steps[si]?.fields[fi], sel = BF.a[f.e]; if (!f.o || !of?.o || !sel) return;
+    BF.a[f.e] = sel.map(x => { const k = f.o.includes(x) ? -1 : of.o.indexOf(x); return k >= 0 ? f.o[k] : x; });
+  }));
 }
 const bfVal = f => { const v = BF.a[f.e]; if (f.t === 'check' || f.t === 'radio') { const l = (v || []).slice(); if (l.includes('__other')) { l.splice(l.indexOf('__other'), 1, f.other + ': ' + (BF.a[f.e + '_o'] || '').trim()); } return l.join(', '); } return (v || '').trim(); };
 const bfFilled = f => f.t === 'check' || f.t === 'radio' ? !!(BF.a[f.e] || []).length && !((BF.a[f.e] || []).includes('__other') && !(BF.a[f.e + '_o'] || '').trim()) : !!bfVal(f);
@@ -583,16 +637,16 @@ function bfRender(noFocus) {
   const { b, screens, i, a } = BF, sc = screens[i], body = document.getElementById('bf-body'); if (!body) return;
   const qt = qCount(b), qn = screens.slice(0, i + 1).filter(x => x.k === 'q').length;
   document.getElementById('bf-p').style.width = (BF.sent ? 100 : Math.round(i / (screens.length - 1) * 100)) + '%';
-  document.getElementById('bf-n').textContent = BF.sent ? 'Отправлено' : sc.k === 'q' ? `${String(qn).padStart(2, '0')} / ${qt}` : `Бриф ${b.n}`;
+  document.getElementById('bf-n').textContent = BF.sent ? T.sent : sc.k === 'q' ? `${String(qn).padStart(2, '0')} / ${qt}` : T.briefN(b.n);
   const err = `<p class="err" id="bf-err" role="alert">${esc(BF.err)}</p>`;
-  const back = i > 0 && !BF.sent ? '<button type="button" class="ghost" id="bf-back">← Назад</button>' : '';
+  const back = i > 0 && !BF.sent ? '<button type="button" class="ghost" id="bf-back">' + esc(T.backBtn) + '</button>' : '';
   let h = '';
   if (BF.sent) {
-    h = `<p class="eyebrow mono"><span>Бриф ${b.n} · ${esc(b.name)}</span></p><h1>Спасибо</h1><p class="lead">Ответы получены. Я прочитаю их и напишу вам, как двигаться дальше.</p><p class="hint">Если хотите добавить файлы с примерами, пришлите их в Telegram <a href="${me.telegram[1]}" target="_blank" rel="noopener">${me.telegram[0]}</a> или на почту ${me.email}.</p><div class="acts"><a class="bfn" href="#works" data-sec>К работам <i>→</i></a></div>`;
+    h = `<p class="eyebrow mono"><span>${esc(T.briefN(b.n))} · ${esc(b.name)}</span></p><h1>${esc(T.thanks)}</h1><p class="lead">${esc(T.thanksLead)}</p><p class="hint">${T.thanksHintH(`<a href="${me.telegram[1]}" target="_blank" rel="noopener">${me.telegram[0]}</a>`, me.email)}</p><div class="acts"><a class="bfn" href="#works" data-sec>${esc(T.toWork)} <i>→</i></a></div>`;
   } else if (sc.k === 'intro') {
-    h = `<p class="eyebrow mono"><span>Бриф ${b.n}</span><span>${qCount(b)} ${plural(qCount(b), ['вопрос', 'вопроса', 'вопросов'])}</span></p><h1>${esc(b.title)}</h1><p class="lead">${esc(b.intro)}</p><div class="acts"><button type="button" class="bfn" id="bf-go">${BF.saved ? 'Продолжить' : 'Начать'} <i>→</i></button>${BF.saved ? '<button type="button" class="ghost" id="bf-reset">Начать заново</button>' : ''}</div>`;
+    h = `<p class="eyebrow mono"><span>${esc(T.briefN(b.n))}</span><span>${qCount(b)} ${T.plural(qCount(b), T.qWords)}</span></p><h1>${esc(b.title)}</h1><p class="lead">${esc(b.intro)}</p><div class="acts"><button type="button" class="bfn" id="bf-go">${esc(BF.saved ? T.cont : T.start)} <i>→</i></button>${BF.saved ? `<button type="button" class="ghost" id="bf-reset">${esc(T.reset)}</button>` : ''}</div>`;
   } else if (sc.k === 'sec') {
-    h = `<p class="eyebrow mono"><span>Раздел</span></p><h2 class="big">${esc(sc.s.title)}</h2><p class="lead">${esc(sc.s.intro)}${sc.s.link ? ` <a href="${esc(sc.s.link[1])}" target="_blank" rel="noopener">${esc(sc.s.link[0])}</a>.` : ''}</p><div class="acts"><button type="button" class="bfn" id="bf-go">Дальше <i>→</i></button>${back}</div>`;
+    h = `<p class="eyebrow mono"><span>${esc(T.section)}</span></p><h2 class="big">${esc(sc.s.title)}</h2><p class="lead">${esc(sc.s.intro)}${sc.s.link ? ` <a href="${esc(sc.s.link[1])}" target="_blank" rel="noopener">${esc(sc.s.link[0])}</a>.` : ''}</p><div class="acts"><button type="button" class="bfn" id="bf-go">${esc(T.next)} <i>→</i></button>${back}</div>`;
   } else {
     const f = sc.f, last = i === screens.length - 1, id = 'f' + f.e.slice(6);
     let inp;
@@ -601,9 +655,9 @@ function bfRender(noFocus) {
     else if (f.t === 'long') inp = `<textarea id="${id}" placeholder="${esc(f.ph || '')}"${dby}>${esc(a[f.e] || '')}</textarea>`;
     else {
       const sel = a[f.e] || [], one = f.t === 'radio';
-      inp = `<div class="opts" role="group" aria-labelledby="${id}l">${f.o.map(o => `<label class="opt"><input type="checkbox" value="${esc(o)}" ${sel.includes(o) ? 'checked' : ''}>${esc(o)}</label>`).join('')}${f.other ? `<label class="opt"><input type="checkbox" value="__other" ${sel.includes('__other') ? 'checked' : ''}>${esc(f.other)}</label>${sel.includes('__other') ? `<input type="text" class="opt-other" id="${id}o" placeholder="Напишите свой вариант" value="${esc(a[f.e + '_o'] || '')}">` : ''}` : ''}</div>`;
+      inp = `<div class="opts" role="group" aria-labelledby="${id}l">${f.o.map(o => `<label class="opt"><input type="checkbox" value="${esc(o)}" ${sel.includes(o) ? 'checked' : ''}>${esc(o)}</label>`).join('')}${f.other ? `<label class="opt"><input type="checkbox" value="__other" ${sel.includes('__other') ? 'checked' : ''}>${esc(f.other)}</label>${sel.includes('__other') ? `<input type="text" class="opt-other" id="${id}o" placeholder="${esc(T.other)}" value="${esc(a[f.e + '_o'] || '')}">` : ''}` : ''}</div>`;
     }
-    h = `<p class="eyebrow mono"><span>${esc(sc.s.title)}</span><span class="req">${f.r ? 'Обязательный вопрос' : 'Можно пропустить'}</span></p><h2 class="q" id="${id}l"><label for="${id}">${esc(f.q)}</label></h2>${f.h ? `<p class="hint" id="${id}h">${esc(f.h)}</p>` : ''}${inp}${err}<input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true"><div class="acts"><button type="button" class="bfn" id="bf-go" ${BF.busy ? 'disabled' : ''}>${last ? (BF.busy ? 'Отправляем…' : 'Отправить') : 'Дальше'} <i>→</i></button>${back}<span class="keys">${f.t === 'short' ? 'Enter — дальше' : f.t === 'long' ? 'Ctrl + Enter — дальше' : ''}</span></div>`;
+    h = `<p class="eyebrow mono"><span>${esc(sc.s.title)}</span><span class="req">${esc(f.r ? T.req : T.opt)}</span></p><h2 class="q" id="${id}l"><label for="${id}">${esc(f.q)}</label></h2>${f.h ? `<p class="hint" id="${id}h">${esc(f.h)}</p>` : ''}${inp}${err}<input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true"><div class="acts"><button type="button" class="bfn" id="bf-go" ${BF.busy ? 'disabled' : ''}>${esc(last ? (BF.busy ? T.sending : T.send) : T.next)} <i>→</i></button>${back}<span class="keys">${f.t === 'short' ? T.keyEnter : f.t === 'long' ? T.keyCtrl : ''}</span></div>`;
   }
   body.innerHTML = h; typoTree(body);
   if (BF.err && sc.k === 'q') body.querySelector('input[type=text],textarea,.opts')?.setAttribute('aria-invalid', 'true');
@@ -634,7 +688,7 @@ const bfTop = () => document.getElementById('bf')?.scrollIntoView();
 function bfNext() {
   const { screens } = BF, sc = screens[BF.i];
   if (BF.i === 0 && BF.saved) { BF.i = BF.saved; BF.err = ''; bfRender(); bfTop(); return; }
-  if (sc.k === 'q' && sc.f.r && !bfFilled(sc.f)) { BF.err = 'Ответьте, пожалуйста: этот вопрос обязательный.'; bfRender(); return; }
+  if (sc.k === 'q' && sc.f.r && !bfFilled(sc.f)) { BF.err = T.errReq; bfRender(); return; }
   BF.err = '';
   if (BF.i < screens.length - 1) { BF.i++; bfStore(BF.b, { a: BF.a, i: BF.i }); bfRender(); bfTop(); return; }
   bfSend();
@@ -646,7 +700,7 @@ function bfSend() {
   const done = () => { BF.sent = true; BF.busy = false; bfStore(b, null); bfRender(); bfTop(); };
   if (document.querySelector('.hp')?.value) return done();
   fetch(b.form, { method: 'POST', mode: 'no-cors', body }).then(done).catch(() => {
-    BF.busy = false; BF.err = `Не получилось отправить. Проверьте интернет и попробуйте ещё раз или напишите мне: ${me.telegram[0]}, ${me.email}.`; bfRender(true);
+    BF.busy = false; BF.err = T.errSend(me.telegram[0], me.email); bfRender(true);
   });
 }
 
@@ -654,22 +708,24 @@ const SECS = ['works', 'about', 'reviews', 'brief'];
 let pending = null, routed = false;
 /* после смены «экрана» фокус переносится на заголовок/секцию: клавиатура и скринридер не остаются на <body> */
 function landFocus(el) { if (!el) return; el.setAttribute('tabindex', '-1'); el.focus({ preventScroll: true }); }
-function route() {
+function route(keep) {
   const h = location.hash.slice(1), p = P.find(x => x.id === h), app = document.getElementById('app');
   const isSec = SECS.includes(h), bb = BR.find(x => 'brief-' + x.id === h);
   let target = null;
-  if (bb) { app.innerHTML = briefShell(bb) + footer(); bfStart(bb); scrollTo(0, 0); }
-  else if (p) { app.innerHTML = kase(p) + footer(); scrollTo(0, 0); }
+  if (bb) { app.innerHTML = briefShell(bb) + footer(); bfStart(bb, keep && BF); if (!keep) scrollTo(0, 0); }
+  else if (p) { app.innerHTML = kase(p) + footer(); if (!keep) scrollTo(0, 0); }
   else {
-    if (!app.dataset.home) app.innerHTML = home() + footer();
+    if (!app.dataset.home || keep) app.innerHTML = home() + footer();
     fit(); bindShapes();
-    const t = target = isSec ? h : pending; pending = null;
-    if (t) requestAnimationFrame(() => document.getElementById(t)?.scrollIntoView()); else if (!isSec) scrollTo(0, 0);
+    if (!keep) {
+      const t = target = isSec ? h : pending; pending = null;
+      if (t) requestAnimationFrame(() => document.getElementById(t)?.scrollIntoView()); else if (!isSec) scrollTo(0, 0);
+    }
   }
   app.dataset.home = p || bb ? '' : '1'; theme(p);
   typoTree(document.body); fit();
-  document.title = (p ? p.name + ' — ' : bb ? 'Бриф — ' : '') + 'Воронов';
-  if (routed) landFocus(p || bb ? app.querySelector('h1') : (target && document.getElementById(target)) || app.querySelector('h1'));
+  document.title = (p ? p.name + ' — ' : bb ? T.docBrief : '') + T.docSuffix;
+  if (routed && !keep) landFocus(p || bb ? app.querySelector('h1') : (target && document.getElementById(target)) || app.querySelector('h1'));
   routed = true;
 }
 function bindShapes() {
@@ -700,8 +756,45 @@ document.addEventListener('click', e => {
   const id = a.getAttribute('href').slice(1);
   if (location.hash.slice(1) === id) { e.preventDefault(); document.getElementById(id)?.scrollIntoView(); }
 });
-addEventListener('hashchange', route); addEventListener('resize', fit);
-route(); document.fonts?.ready.then(fit);
+addEventListener('hashchange', () => route()); addEventListener('resize', fit);
+
+/* Язык: тексты шапки и меню, мета-теги и адрес меняются вместе с содержимым страницы. */
+const metaSet = (sel, v) => document.querySelector(sel)?.setAttribute('content', v);
+function chrome() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-t]').forEach(el => { const v = el.dataset.t.split('.').reduce((o, k) => o?.[k], T); if (typeof v === 'string') el.textContent = v; });
+  document.getElementById('nav').setAttribute('aria-label', T.navAria); ov.setAttribute('aria-label', T.menu);
+  const sw = document.getElementById('lsw'); sw.hidden = !HAS_EN; sw.setAttribute('aria-label', T.langAria);
+  sw.querySelectorAll('button').forEach(b => b.dataset.lang === lang ? b.setAttribute('aria-current', 'true') : b.removeAttribute('aria-current'));
+  const url = 'https://design.openline.one/' + (lang === 'en' ? '?lang=en' : '');
+  document.querySelector('link[rel=canonical]')?.setAttribute('href', url); metaSet('meta[property="og:url"]', url);
+  metaSet('meta[name=description]', T.desc); metaSet('meta[property="og:title"]', T.ogTitle); metaSet('meta[property="og:description"]', T.ogDesc);
+  metaSet('meta[property="og:image:alt"]', T.ogAlt); metaSet('meta[property="og:site_name"]', T.siteName);
+  metaSet('meta[property="og:locale"]', T.locale); metaSet('meta[property="og:locale:alternate"]', lang === 'en' ? 'ru_RU' : 'en_US');
+}
+/* При смене языка страница остаётся на том же месте: запоминаем блок под шапкой и смещение внутри него. */
+const ANCHORS = '#app section, #app footer, #app .poster, #app article > *, #app .g > *';
+function anchorGet() {
+  const hh = document.querySelector('.hd').offsetHeight, list = [...document.querySelectorAll(ANCHORS)];
+  if (scrollY < 4 || !list.length) return null;
+  let k = 0; list.forEach((el, i) => { if (el.getBoundingClientRect().top <= hh + 1) k = i; });
+  return { i: k, off: hh - list[k].getBoundingClientRect().top };
+}
+function anchorSet(a) {
+  const root = document.documentElement; root.style.scrollBehavior = 'auto';
+  const el = a && document.querySelectorAll(ANCHORS)[a.i];
+  scrollTo(0, el ? el.getBoundingClientRect().top + scrollY - document.querySelector('.hd').offsetHeight + Math.min(a.off, el.offsetHeight) : 0);
+  requestAnimationFrame(() => { root.style.scrollBehavior = ''; });
+}
+function setLang(l) {
+  if (l === lang || !LANGS[l]) return;
+  const a = anchorGet();
+  useLang(l); try { localStorage.setItem('mv-lang', l); } catch (e) {}
+  try { const u = new URL(location.href); if (l === 'ru') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.pathname + u.search + u.hash); } catch (e) {}
+  chrome(); route(true); anchorSet(a);
+}
+document.getElementById('lsw').addEventListener('click', e => { const b = e.target.closest('button[data-lang]'); if (b) setLang(b.dataset.lang); });
+chrome(); route(); document.fonts?.ready.then(fit); document.fonts?.addEventListener?.('loadingdone', fit);
 </script>
 </body>
 </html>
