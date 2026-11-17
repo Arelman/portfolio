@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#EFEFEA">
 <link rel="canonical" href="https://design.openline.one/">
 <link rel="alternate" hreflang="ru" href="https://design.openline.one/">
-<link rel="alternate" hreflang="en" href="https://design.openline.one/?lang=en">
+<link rel="alternate" hreflang="en" href="https://design.openline.one/en/">
 <link rel="alternate" hreflang="x-default" href="https://design.openline.one/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
@@ -420,11 +420,11 @@ figcaption{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:u
   <div class="sub"><a href="https://t.me/Arelman">Telegram @Arelman</a><a href="mailto:korvinart23@gmail.com">korvinart23@gmail.com</a></div>
 </div>
 <main id="app"></main>
-<script src="assets/data.js"></script>
-<script src="assets/briefs.js"></script>
-<script src="assets/data.en.js"></script>
-<script src="assets/briefs.en.js"></script>
-<script src="assets/ui.js"></script>
+<script src="/assets/data.js"></script>
+<script src="/assets/briefs.js"></script>
+<script src="/assets/data.en.js"></script>
+<script src="/assets/briefs.en.js"></script>
+<script src="/assets/ui.js"></script>
 <script>
 /* Два языка: русский (по умолчанию) и английский. Контент (data*.js, briefs*.js) и тексты интерфейса (ui.js) переключаются целиком.
    Язык: ?lang=ru|en в адресе → сохранённый выбор → русский. */
@@ -437,7 +437,7 @@ function useLang(l) { lang = l; const L = LANGS[l]; P = L.data.projects; me = L.
 useLang(lang);
 const qCount = b => b.steps.reduce((n, s) => n + s.fields.length, 0);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const im = (f, alt) => { const d = MV.dims[f] || [16, 9]; return `<img src="assets/${f}" alt="${esc(alt || '')}" width="${d[0]}" height="${d[1]}" loading="lazy">`; };
+const im = (f, alt) => { const d = MV.dims[f] || [16, 9]; return `<img src="/assets/${f}" alt="${esc(alt || '')}" width="${d[0]}" height="${d[1]}" loading="lazy">`; };
 const pal = p => `--pb:${p.pal.bg};--pf:${p.pal.fg};--pa:${p.pal.ac};--hb:${p.pal.bg};--hf:${p.pal.fg}`;
 /* тёмная тема: у каждого кейса свой фон; полосы-акценты берут второй цвет проекта */
 const DK = {
@@ -766,7 +766,7 @@ function chrome() {
   document.getElementById('nav').setAttribute('aria-label', T.navAria); ov.setAttribute('aria-label', T.menu);
   const sw = document.getElementById('lsw'); sw.hidden = !HAS_EN; sw.setAttribute('aria-label', T.langAria);
   sw.querySelectorAll('button').forEach(b => b.dataset.lang === lang ? b.setAttribute('aria-current', 'true') : b.removeAttribute('aria-current'));
-  const url = 'https://design.openline.one/' + (lang === 'en' ? '?lang=en' : '');
+  const url = 'https://design.openline.one/' + (lang === 'en' ? 'en/' : '');
   document.querySelector('link[rel=canonical]')?.setAttribute('href', url); metaSet('meta[property="og:url"]', url);
   metaSet('meta[name=description]', T.desc); metaSet('meta[property="og:title"]', T.ogTitle); metaSet('meta[property="og:description"]', T.ogDesc);
   metaSet('meta[property="og:image:alt"]', T.ogAlt); metaSet('meta[property="og:site_name"]', T.siteName);
@@ -786,15 +786,16 @@ function anchorSet(a) {
   scrollTo(0, el ? el.getBoundingClientRect().top + scrollY - document.querySelector('.hd').offsetHeight + Math.min(a.off, el.offsetHeight) : 0);
   requestAnimationFrame(() => { root.style.scrollBehavior = ''; });
 }
+/* Адрес страницы: английская версия — /en/ (у этого адреса английское превью ссылки), русская — корень. Пути к файлам абсолютные, поэтому смена адреса их не ломает. */
+function syncUrl() { try { history.replaceState(null, '', (lang === 'en' ? '/en/' : '/') + location.hash); } catch (e) {} }
 function setLang(l) {
   if (l === lang || !LANGS[l]) return;
   const a = anchorGet();
   useLang(l); try { localStorage.setItem('mv-lang', l); } catch (e) {}
-  try { const u = new URL(location.href); if (l === 'ru') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.pathname + u.search + u.hash); } catch (e) {}
-  chrome(); route(true); anchorSet(a);
+  syncUrl(); chrome(); route(true); anchorSet(a);
 }
 document.getElementById('lsw').addEventListener('click', e => { const b = e.target.closest('button[data-lang]'); if (b) setLang(b.dataset.lang); });
-chrome(); route(); document.fonts?.ready.then(fit); document.fonts?.addEventListener?.('loadingdone', fit);
+chrome(); syncUrl(); route(); document.fonts?.ready.then(fit); document.fonts?.addEventListener?.('loadingdone', fit);
 </script>
 </body>
 </html>
