@@ -20,17 +20,19 @@ window.MV.en = {
     photo: 'me.jpg'
   },
 
-  /* Reviews are translated from Russian; the first item of each pair is the title of the order. */
+  /* Reviews are translated from Russian: [order, text, client name, organization]. The organization is empty if the client gave none. */
   reviews: [
-    ['Brochure layout', 'A professional approach! Lots of ideas and suggestions on how to do it better. Matvey did not just design the brochure; he also worked through the content of every page with us, step by step. Everything was done on time and in the best possible way!'],
-    ['Instagram post series', 'Matvey is a true professional. He did the work at the highest level, kept strictly to deadlines, paid attention to detail and stayed in touch. On top of that, Matvey has a wonderful sense of humor, which made the whole process pleasant and easy!'],
-    ['Banner layout design', 'It was very comfortable to work on this task, and since we had no clear vision of the final result, we looked at different options together with the volunteer. Huge thanks for the help and support, and of course for getting us to the perfect result in the end'],
-    ['Banners for the “Internship” program', 'Matvey created wonderful banner design options for us, thank you. We are already working together on a second task, and I want to note that the comfortable communication with the volunteer goes perfectly with the high quality of the work.'],
-    ['Banners (Yandex contextual ads)', 'Thank you very much! The work was done quickly and to a very high standard, and new design solutions were suggested for the banners. I recommend Matvey as an excellent designer: working with him was wonderful and very efficient.'],
-    ['Presentation update', 'Thank you. The redesign is excellent. It is now much easier to present with these slides.'],
-    ['Certificate design', 'Matvey, thank you for your work! The beautiful design of our certificates that you created will delight our volunteers all year!'],
-    ['Name and visuals for a project', 'Matvey handled the task brilliantly and showed real creativity. Many thanks.'],
-    ['Logo swap on an image', 'Many thanks for your help! The work was done excellently! We were glad to work with you.']
+    ['Brochure layout', 'A professional approach! Lots of ideas and suggestions on how to do it better. Matvey did not just design the brochure; he also worked through the content of every page with us, step by step. Everything was done on time and in the best possible way!', 'Kristina L.', 'Preodolenie Trudnostey nonprofit'],
+    ['Instagram post series', 'Matvey is a true professional. He did the work at the highest level, kept strictly to deadlines, paid attention to detail and stayed in touch. On top of that, Matvey has a wonderful sense of humor, which made the whole process pleasant and easy!', 'Oxana G.', 'Memoria Artis'],
+    ['Banner layout design', 'It was very comfortable to work on this task, and since we had no clear vision of the final result, we looked at different options together with the volunteer. Huge thanks for the help and support, and of course for getting us to the perfect result in the end', 'Viktoria M.', ''],
+    ['Logo for a youth project', 'Matvey did exactly what was needed. Perfect. We are adding Matvey to the project’s Hall of Fame.', 'Oleg I.', 'MMOOMM'],
+    ['Banners for the “Internship” program', 'Matvey created wonderful banner design options for us, thank you. We are already working together on a second task, and I want to note that the comfortable communication with the volunteer goes perfectly with the high quality of the work.', 'Irina A.', 'House with a Lighthouse charity'],
+    ['Banners (Yandex contextual ads)', 'Thank you very much! The work was done quickly and to a very high standard, and new design solutions were suggested for the banners. I recommend Matvey as an excellent designer: working with him was wonderful and very efficient.', 'Irina A.', 'House with a Lighthouse charity'],
+    ['Presentation update', 'Thank you. The redesign is excellent. It is now much easier to present with these slides.', 'Irina A.', 'House with a Lighthouse charity'],
+    ['Certificate design', 'Matvey, thank you for your work! The beautiful design of our certificates that you created will delight our volunteers all year!', 'Antonina L.', 'Vse Svoi! center'],
+    ['Logo', 'Thank you so much for the logo! Thank you for the tips on what works best where! Thank you for the quick turnaround! I definitely recommend him!', 'Gulnaz O.', 'Birge project'],
+    ['Name and visuals for a project', 'Matvey handled the task brilliantly and showed real creativity. Many thanks.', 'Semyon N.', ''],
+    ['Logo swap on an image', 'Many thanks for your help! The work was done excellently! We were glad to work with you.', 'Antonina L.', 'Vse Svoi! center']
   ],
 
   projects: [

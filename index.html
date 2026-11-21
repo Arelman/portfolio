@@ -82,7 +82,12 @@ a{color:inherit}
 .hero-meta{display:grid;grid-template-columns:4fr 5fr 3fr;gap:clamp(16px,3vw,48px);border-top:2px solid var(--rule);margin-top:clamp(18px,2.4vw,36px);padding-block:14px clamp(20px,3vw,40px)}
 .hero-meta p{margin:0;max-width:34em}
 .hero-meta b{font-weight:600}
-.cta{display:inline-flex;align-items:center;gap:12px;font:800 clamp(24px,2.4vw,34px)/1 var(--display);text-transform:uppercase;text-decoration:none;justify-self:end;align-self:start}
+.cta-box{justify-self:end;align-self:start;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.cta-alt,.brief-alt{margin:0;color:var(--mute)}
+.cta-alt a,.brief-alt a{color:var(--ink);text-underline-offset:3px;position:relative}
+.cta-alt a::after,.brief-alt a::after{content:"";position:absolute;inset:-13px -4px}
+.brief-alt{margin-top:calc(clamp(22px,3vw,40px) * -.5);padding-bottom:clamp(22px,3vw,40px)}
+.cta{display:inline-flex;align-items:center;gap:12px;font:800 clamp(24px,2.4vw,34px)/1 var(--display);text-transform:uppercase;text-decoration:none}
 .cta i{width:1.5em;height:1.5em;border-radius:50%;background:#FFD60A;color:#0C0C0D;display:grid;place-items:center;font-style:normal;font-family:var(--text);font-size:.7em;transition:transform .25s}
 .cta:hover i{transform:translateY(4px)}
 
@@ -168,6 +173,8 @@ a{color:inherit}
 .rev li q{display:block;quotes:"«" "»";margin-top:10px;font-size:16px;line-height:1.45}
 .rev li:nth-child(-n+3) q{font:500 clamp(18px,1.5vw,22px)/1.32 var(--text)}
 html[lang=en] .rev li q{quotes:"“" "”"}
+.rev .by{margin:14px 0 0;font:600 15px/1.3 var(--text)}
+.rev .by .mono{display:block;margin-top:3px;color:var(--mute)}
 .rev .note{margin:clamp(16px,2.4vw,32px) 0 0;color:var(--mute)}
 
 /* бриф */
@@ -367,7 +374,7 @@ figcaption{font:500 11.5px/1.4 var(--mono);letter-spacing:.04em;text-transform:u
   .lsw{margin-left:auto;border:0}.lsw button{border:2px solid var(--ink);padding:10px 9px}.lsw button[aria-current=true]{display:none}
   .lsw button:hover{background:var(--ink);color:var(--paper)}.tbtn{padding:10px 9px}
   .row2{grid-template-columns:1fr}.row2 .fitline{width:100%}.hero-post{max-width:none;padding:0;margin-top:8px}
-  .hero-meta{grid-template-columns:1fr}.cta{justify-self:start}
+  .hero-meta{grid-template-columns:1fr}.cta-box{justify-self:start;align-items:flex-start}
   .supre{aspect-ratio:1/1.34}
   .supre .cap{bottom:auto;top:14px;right:var(--gut);max-width:none}
   .s-ri{left:6%;top:31%;width:46%}.s-salt{left:14%;top:70%;width:74%;height:4.4%}.s-fas{left:62%;top:30%;width:26%}
@@ -437,7 +444,7 @@ function useLang(l) { lang = l; const L = LANGS[l]; P = L.data.projects; me = L.
 useLang(lang);
 const qCount = b => b.steps.reduce((n, s) => n + s.fields.length, 0);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const im = (f, alt) => { const d = MV.dims[f] || [16, 9]; return `<img src="/assets/${f}" alt="${esc(alt || '')}" width="${d[0]}" height="${d[1]}" loading="lazy">`; };
+const im = (f, alt) => { const d = MV.dims[f] || [16, 9], t = MV.tone && MV.tone[f]; return `<img src="/assets/${f}" alt="${esc(alt || '')}" width="${d[0]}" height="${d[1]}" loading="lazy"${t ? ` style="background:${t}"` : ''}>`; };
 const pal = p => `--pb:${p.pal.bg};--pf:${p.pal.fg};--pa:${p.pal.ac};--hb:${p.pal.bg};--hf:${p.pal.fg}`;
 /* тёмная тема: у каждого кейса свой фон; полосы-акценты берут второй цвет проекта */
 const DK = {
@@ -474,7 +481,7 @@ function home() {
   <div class="hero-meta">
     <p>${T.heroIntroH}</p>
     <p class="mono" style="line-height:1.7">${esc(T.heroTags)}</p>
-    <a class="cta" href="#brief" data-sec>${esc(T.cta)} <i>↓</i></a>
+    <div class="cta-box"><a class="cta" href="#brief" data-sec>${esc(T.cta)} <i>↓</i></a><p class="mono cta-alt">${esc(T.briefTime)} · ${esc(T.ctaOr)} <a href="${me.telegram[1]}" target="_blank" rel="noopener">${esc(T.ctaTg)}</a></p></div>
   </div>
 </section>
 <section class="supre" aria-label="${esc(T.supreAria)}">
@@ -505,14 +512,15 @@ function home() {
 <section class="rev wrap" id="reviews">
   <div class="sect-h" style="margin-bottom:clamp(20px,3vw,40px)"><h2>${esc(T.reviewsH)}</h2><span class="mono">${esc(T.reviewsMono)}</span></div>
   <div class="big"><p>${esc(T.reviewsLead)}</p></div>
-  <ul>${REV.map(r => `<li><span class="mono">${esc(r[0])}</span><q>${esc(r[1])}</q></li>`).join('')}</ul>${T.revNote ? `
+  <ul>${REV.map(r => `<li><span class="mono">${esc(r[0])}</span><q>${esc(r[1])}</q>${r[2] ? `<p class="by">${esc(r[2])}${r[3] ? `<span class="mono">${esc(r[3])}</span>` : ''}</p>` : ''}</li>`).join('')}</ul>${T.revNote ? `
   <p class="mono note">${esc(T.revNote)}</p>` : ''}
 </section>
 <section id="brief">
   <div class="sect-h stack wrap"><h2>${esc(T.briefH)}</h2><span class="mono">${esc(T.briefMono)}</span></div>
   <p class="brief-lead wrap">${esc(T.briefLead)}</p>
+  <p class="mono brief-alt wrap">${esc(T.briefTime)} · ${esc(T.ctaOr)} <a href="${me.telegram[1]}" target="_blank" rel="noopener">${esc(T.ctaTg)} ${esc(me.telegram[0])}</a></p>
   <div class="brief">
-    ${BR.map(b => `<a class="wrap" href="#brief-${b.id}"><span class="mono">${esc(T.briefTag(b.n, `${qCount(b)} ${T.plural(qCount(b), T.qWords)}`))}</span><span><b>${esc(b.name)}</b><span class="go" style="margin-top:18px">${esc(T.open)} <i><span>→</span></i></span></span></a>`).join('')}
+    ${BR.map(b => `<a class="wrap" href="#brief-${b.id}"><span class="mono">${esc(T.briefTag(b.n, `${qCount(b)} ${T.plural(qCount(b), T.qWords)}`))} · ${esc(T.briefTime)}</span><span><b>${esc(b.name)}</b><span class="go" style="margin-top:18px">${esc(T.open)} <i><span>→</span></i></span></span></a>`).join('')}
   </div>
 </section>`;
 }
@@ -704,6 +712,8 @@ function bfSend() {
   });
 }
 
+/* новый «экран» (кейс, бриф) открывается сразу сверху: плавная прокрутка из CSS здесь не нужна, иначе страница едет вверх на глазах */
+function jumpTop() { scrollTo({ top: 0, left: 0, behavior: 'instant' }); }
 const SECS = ['works', 'about', 'reviews', 'brief'];
 let pending = null, routed = false;
 /* после смены «экрана» фокус переносится на заголовок/секцию: клавиатура и скринридер не остаются на <body> */
@@ -712,8 +722,8 @@ function route(keep) {
   const h = location.hash.slice(1), p = P.find(x => x.id === h), app = document.getElementById('app');
   const isSec = SECS.includes(h), bb = BR.find(x => 'brief-' + x.id === h);
   let target = null;
-  if (bb) { app.innerHTML = briefShell(bb) + footer(); bfStart(bb, keep && BF); if (!keep) scrollTo(0, 0); }
-  else if (p) { app.innerHTML = kase(p) + footer(); if (!keep) scrollTo(0, 0); }
+  if (bb) { app.innerHTML = briefShell(bb) + footer(); bfStart(bb, keep && BF); if (!keep) jumpTop(); }
+  else if (p) { app.innerHTML = kase(p) + footer(); if (!keep) jumpTop(); }
   else {
     if (!app.dataset.home || keep) app.innerHTML = home() + footer();
     fit(); bindShapes();
@@ -781,10 +791,8 @@ function anchorGet() {
   return { i: k, off: hh - list[k].getBoundingClientRect().top };
 }
 function anchorSet(a) {
-  const root = document.documentElement; root.style.scrollBehavior = 'auto';
   const el = a && document.querySelectorAll(ANCHORS)[a.i];
-  scrollTo(0, el ? el.getBoundingClientRect().top + scrollY - document.querySelector('.hd').offsetHeight + Math.min(a.off, el.offsetHeight) : 0);
-  requestAnimationFrame(() => { root.style.scrollBehavior = ''; });
+  scrollTo({ top: el ? el.getBoundingClientRect().top + scrollY - document.querySelector('.hd').offsetHeight + Math.min(a.off, el.offsetHeight) : 0, behavior: 'instant' });
 }
 /* Адрес страницы: английская версия — /en/ (у этого адреса английское превью ссылки), русская — корень. Пути к файлам абсолютные, поэтому смена адреса их не ломает. */
 function syncUrl() { try { history.replaceState(null, '', (lang === 'en' ? '/en/' : '/') + location.hash); } catch (e) {} }
